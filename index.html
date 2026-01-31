@@ -1,0 +1,2562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        
+  <title>LINCE – Guia de Liderança, Inteligência Interpessoal e Comunicação Eficaz</title>
+
+  <!-- PWA -->
+  <!-- Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Cor da barra e splash -->
+  <meta name="theme-color" content="#e67e22">
+
+  <!-- iOS -->
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="LINCE">
+
+  <!-- Fallback Android/desktop -->
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+
+  <style>
+/* ====== Estilos principais ====== */
+
+/* === FAIL-SAFE crítico para esconder módulos mesmo se CSS/ordem falhar === */
+[hidden] { display: none !important; }
+.module { display: none !important; }
+.module.active { display: block !important; }
+
+.vertical-menu { display: flex; flex-direction: column; gap: 12px; }
+
+.menu-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.menu-card:active { transform: scale(0.97); background: rgba(230, 126, 34, 0.05); }
+
+.menu-icon {
+  font-size: 28px;
+  margin-right: 15px;
+  width: 50px; height: 50px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-color);
+  border-radius: 12px;
+}
+
+.menu-text { flex-grow: 1; }
+.menu-text strong { display: block; color: var(--primary-color); font-size: 1rem; }
+.menu-text span { font-size: 0.8rem; opacity: 0.7; color: var(--text-color); }
+.menu-arrow { color: var(--primary-color); opacity: 0.5; font-weight: bold; }
+
+/* Esconder a nav-bar quando estiver na home */
+body:not([data-active-tab]) .nav-bar { display: none; }
+
+:root {
+  --primary-color: #e67e22;
+  --primary-hover: #d35400;
+  --secondary-color: #2c3e50;
+  --bg-color: #f4f6f7;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --border-color: #e0e0e0;
+  --success-color: #27ae60;
+  --danger-color: #c0392b;
+  --pill-bg: #fff3cd;
+  --pill-text: #856404;
+
+  /* Cores Eisenhower */
+  --eis-q1: #fadbd8; /* Vermelho claro */
+  --eis-q2: #d4efdf; /* Verde claro */
+  --eis-q3: #f9e79f; /* Amarelo claro */
+  --eis-q4: #f2f3f4; /* Cinza claro */
+  --eis-q1-text: #922b21;
+  --eis-q2-text: #1e8449;
+  --eis-q3-text: #9a7d0a;
+  --eis-q4-text: #626567;
+}
+[data-theme="dark"] {
+  --primary-color: #d35400;
+  --primary-hover: #e67e22;
+  --secondary-color: #1a252f;
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-color: #e0e0e0;
+  --border-color: #333;
+  --success-color: #2ecc71;
+  --danger-color: #e74c3c;
+  --pill-bg: #342a15;
+  --pill-text: #f1c40f;
+
+  /* Eisenhower Dark Mode Ajustes */
+  --eis-q1: #641e16; 
+  --eis-q2: #145a32; 
+  --eis-q3: #7d6608; 
+  --eis-q4: #424949; 
+  --eis-q1-text: #ecf0f1;
+  --eis-q2-text: #ecf0f1;
+  --eis-q3-text: #ecf0f1;
+  --eis-q4-text: #ecf0f1;
+}
+
+/* Acessibilidade */
+:focus-visible { outline: 3px solid var(--primary-color); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding-bottom: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 10px 15px;
+  border-bottom: 4px solid var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+.header-content h1 { font-size: 1.1rem; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+.header-content p { font-size: 0.7rem; margin: 0; opacity: 0.9; max-width: 250px;}
+.app-icon { font-size: 24px; margin-right: 8px; vertical-align: middle; }
+.theme-toggle {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
+/* === Correção dos Títulos Goleman no Modo Dark === */
+[data-theme="dark"] #autoc_tab_goleman h4 {
+  color: #ffffff !important; /* Força a cor branca */
+}
+
+/* Opcional: Deixar o texto em inglês entre parênteses um pouco mais suave */
+[data-theme="dark"] #autoc_tab_goleman h4 small {
+  color: #bdc3c7 !important; /* Cinza claro */
+}
+
+/* === Botões do Simulador (Estilo Contorno Laranja) === */
+#sim-start .action-btn {
+  /* 1. Fundo Branco */
+  background-color: #ffffff !important; 
+  /* 2. Letras Pretas */
+  color: #333333 !important; 
+  /* 3. Contorno Laranja */
+  border: 2px solid var(--primary-color) !important; 
+  /* Layout */
+  margin-bottom: 12px;
+  padding: 15px; 
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  /* Alinhamento do Texto e Ícones */
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+
+/* 1. Estilo base do botão no modo escuro (Dark) */
+[data-theme="dark"] #sim-start .action-btn {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* 2. Hover/Active no Dark */
+[data-theme="dark"] #sim-start .action-btn:hover,
+[data-theme="dark"] #sim-start .action-btn:active,
+[data-theme="dark"] #sim-start .action-btn:focus {
+    background-color: var(--primary-color) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3) !important;
+    transform: translateX(5px);
+    outline: none;
+}
+
+/* Botão de Retorno (Seta Home) Melhorado */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--card-bg) !important;
+    color: var(--secondary-color) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.btn-back:hover, .btn-back:active {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border-color: var(--primary-color) !important;
+    transform: translateX(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+[data-theme="dark"] .btn-back {
+    background-color: #2c2c2c !important;
+    color: #ffffff !important;
+    border-color: #444 !important;
+}
+
+/* === Efeito do botão padrão === */
+#sim-start .action-btn:hover,
+#sim-start .action-btn:active,
+#sim-start .action-btn:focus {
+  background-color: var(--primary-color) !important; 
+  color: #ffffff !important;
+  transform: translateX(5px);
+  box-shadow: 0 4px 10px rgba(230, 126, 34, 0.2);
+}
+
+/* === Ajuste fino do Dark === */
+[data-theme="dark"] #sim-start .action-btn {
+   background-color: #1e1e1e !important;
+   color: #ffffff !important;
+}
+
+.container {
+  padding: 15px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+.card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.4s ease-in-out;
+}
+h2 { color: var(--primary-color); font-size: 1.2rem; margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px; }
+h3 { color: var(--secondary-color); margin-top: 20px; font-size: 1rem; }
+[data-theme="dark"] h3 { color: #aaa; }
+
+/* Barra de Progresso do Checklist */
+.progress-container { width: 100%; background: #eee; height: 8px; border-radius: 4px; margin-bottom: 15px; overflow: hidden; }
+#checklist-bar { width: 0%; height: 100%; background: var(--success-color); transition: 0.3s ease; }
+
+.pilula-box {
+  background: var(--pill-bg);
+  color: var(--pill-text);
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+button.action-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: background 0.2s;
+  font-weight: 600;
+}
+button.action-btn:hover { background-color: var(--primary-hover); }
+button.secondary-btn { background-color: var(--secondary-color); margin-top: 10px; }
+
+.question { margin-bottom: 15px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; }
+.question p { font-weight: 600; margin-bottom: 8px; font-size: 0.95rem; }
+
+.result-box {
+  text-align: center;
+  padding: 20px;
+  background: rgba(39, 174, 96, 0.08);
+  border-radius: 8px;
+  border: 1px solid var(--success-color);
+  margin-top: 10px;
+}
+.result-title { font-size: 1.6rem; font-weight: 700; color: var(--success-color); margin: 10px 0; }
+
+.checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.section-title { font-size: 0.8rem; font-weight: bold; color: var(--primary-color); text-transform: uppercase; margin-top: 15px; margin-bottom: 5px; }
+
+.accordion {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 12px 15px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 0.95rem;
+  transition: 0.3s;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.accordion:hover { background-color: rgba(0,0,0,0.02); color: var(--primary-color); }
+.accordion:after { content: '+'; font-size: 1.2rem; font-weight: normal; }
+.active-acc:after { content: '-'; }
+
+.panel {
+  padding: 0 15px;
+  display: none;
+  background-color: var(--card-bg);
+  overflow: hidden;
+  border-left: 3px solid var(--primary-color);
+  margin-bottom: 5px;
+}
+.panel h4 { color: var(--secondary-color); margin-bottom: 4px; margin-top: 12px; font-size: 0.85rem; text-transform: uppercase; }
+[data-theme="dark"] .panel h4 { color: var(--primary-color); }
+
+.example-speech {
+  background: rgba(0,0,0,0.04);
+  padding: 10px;
+  border-radius: 4px;
+  font-style: italic;
+  margin: 8px 0 15px 0;
+  font-size: 0.9rem;
+}
+
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--card-bg);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  border-top: 1px solid var(--border-color);
+}
+.nav-item { text-align: center; color: #95a5a6; cursor: pointer; flex: 1; padding: 5px; border-radius: 8px; transition: 0.2s; }
+.nav-item.active { color: var(--primary-color); font-weight: bold; background-color: rgba(0,0,0,0.03); }
+.nav-icon { font-size: 20px; display: block; margin-bottom: 2px;}
+.nav-text { font-size: 11px; text-transform: uppercase; }
+
+.credits {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #7f8c8d;
+  padding: 15px;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
+  margin-bottom: 60px;
+}
+
+@media (min-width: 768px) {
+  body { padding-bottom: 0; height: auto; }
+  header { display: none; }
+  .nav-bar {
+    position: sticky; top: 0; bottom: auto; justify-content: flex-end;
+    padding: 0 30px; background: var(--secondary-color); height: 60px; align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  .nav-item { flex: 0 0 auto; margin-left: 20px; color: #bdc3c7; display: flex; align-items: center; gap: 8px; padding: 8px 15px;}
+  .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
+  .nav-item.active { color: white; background: rgba(255,255,255,0.15); }
+  .nav-icon { font-size: 18px; margin-bottom: 0; }
+  .nav-text { font-size: 14px; }
+
+ /* === BOTÃO DE TEMA (PC) === */
+            #pc-theme-btn {
+                display: flex !important;
+                position: absolute; left: 20px; top: 12px;
+                color: #2c3e50;
+                background: #ffffff;
+                border: 1px solid #bdc3c7;
+                padding: 5px 15px; border-radius: 20px; cursor: pointer;
+                align-items: center; gap: 5px; font-size: 0.9rem;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+            #pc-theme-btn:hover { transform: scale(1.05); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+            [data-theme="dark"] #pc-theme-btn {
+                color: #ffffff !important;
+                background: rgba(255,255,255,0.15);
+                border: 1px solid rgba(255,255,255,0.4);
+            }
+            [data-theme="dark"] #pc-theme-btn:hover { background: rgba(255,255,255,0.25); }
+}
+.container { margin-top: 20px; margin-bottom: 20px;}
+.checklist-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+.app-header-pc { display: block !important; text-align: center; margin-bottom: 20px; }
+.app-header-pc h1 { color: var(--secondary-color); font-size: 1.8rem; margin: 0; }
+[data-theme="dark"] .app-header-pc h1 { color: var(--primary-color); }
+.credits { margin-bottom: 0; border: none; padding-bottom: 20px;}
+/* Eisenhower Desktop */
+.eis-grid { grid-template-columns: 1fr 1fr; }
+
+.module { display: none; }
+.module.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+.app-header-pc { display: none; }
+#pc-theme-btn { display: none; }
+
+/* --- Plano de Ação --- */
+/* --- Botões do Plano de Ação (Padronizados) --- */
+.btn {
+  background-color: var(--secondary-color);
+  color: white;
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 5px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+.btn:hover, 
+.btn:active, 
+.btn:focus {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* --- Botão Remover --- */
+.btn-remove {
+  background-color: var(--danger-color) !important; 
+  border-color: var(--danger-color) !important;
+}
+.btn-remove:hover, 
+.btn-remove:active {
+  background-color: #a93226 !important;
+  border-color: #a93226 !important;
+}
+.btn:hover { background: #003e6b; }
+.btn-remove { background: #d9534f; }
+.btn-remove:hover { background: #a94442; }
+
+.tema {
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  padding: 18px;
+  margin-bottom: 18px;
+  background: #f9f9f9;
+}
+label { display: block; margin-top: 10px; font-weight: bold; }
+input, select, textarea {
+  width: 100%;
+  padding: 7px;
+  margin-top: 4px;
+  border-radius: 4px;
+  border: 1px solid #b0b0b0;
+  font-size: 1em;
+  box-sizing: border-box; 
+}
+input:invalid, select:invalid, textarea:invalid { border-color: #ffcccc; }
+textarea { resize: vertical; }
+.tema-actions { margin-top: 10px; text-align: right; }
+.lembrete-list { margin-top: 10px; font-size: 0.95em; }
+
+.modal {
+  display: none;
+  position: fixed; z-index: 999;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 600px;
+  position: relative;
+}
+.close { position: absolute; right: 18px; top: 12px; font-size: 1.5em; cursor: pointer; color: #005ca9; }
+
+@media (max-width: 600px) {
+  .modal-content { padding: 10px; }
+}
+
+/* --- Alinhamento dos checkboxes e radio --- */
+.checklist-item, .question label {
+  display: flex; align-items: center; gap: 8px; padding: 4px 0;
+  background: none; border-radius: 0; font-size: 1em; font-weight: normal;
+}
+.checklist-item input[type="checkbox"], .question input[type="radio"] {
+  margin: 0 8px 0 0; accent-color: var(--primary-color);
+  width: 18px; height: 18px; flex-shrink: 0;
+}
+.checklist-item {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+.checklist-item input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+.checklist-item label {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .checklist-grid { display: flex; flex-direction: column; }
+}
+.question label { background: none; padding: 0; margin: 0; border-radius: 0; transition: none; }
+
+/* --- Gamificação --- */
+.badge {
+  display: inline-block; background: var(--success-color); color: #fff;
+  border-radius: 12px; padding: 3px 12px; font-size: 0.9em; margin: 0 5px 5px 0;
+}
+
+/* --- Dashboard --- */
+#dashboard { margin-bottom: 30px; }
+#dashboard canvas { max-width: 400px; margin: 20px auto; display: block; }
+
+/* --- Ajuda/Tour --- */
+#tour-modal {
+  display: none; position: fixed; z-index: 9999;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+}
+#tour-content {
+  background: #fff; margin: 8% auto; padding: 30px; border-radius: 8px;
+  max-width: 400px; position: relative; color: #333;
+}
+#tour-content h2 { color: var(--primary-color); }
+#tour-close { position: absolute; right: 18px; top: 12px; font-size: 1.5em; cursor: pointer; color: #005ca9; }
+
+/* --- SIMULADOR --- */
+.sim-stage { margin-bottom: 20px; }
+.sim-text { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.6; }
+.sim-btn-option {
+  background: var(--card-bg); border: 2px solid var(--border-color);
+  color: var(--text-color); padding: 15px; width: 100%; text-align: left;
+  margin-bottom: 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-weight: 500;
+}
+.sim-btn-option:hover { border-color: var(--primary-color); background: rgba(230, 126, 34, 0.05); }
+.sim-feedback {
+  padding: 15px; border-radius: 6px; margin-top: 15px; margin-bottom: 20px;
+  display: none; font-weight: 500;
+}
+.feedback-good { background: rgba(39, 174, 96, 0.15); border-left: 4px solid var(--success-color); color: var(--text-color); }
+.feedback-bad { background: rgba(192, 57, 43, 0.15); border-left: 4px solid var(--danger-color); color: var(--text-color); }
+.sim-progress { height: 6px; background: #eee; border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
+.sim-bar { height: 100%; background: var(--primary-color); width: 0%; transition: 0.3s; }
+
+/* --- FORM DE USUÁRIO --- */
+#user-info-form, .user-info-block {
+  background: rgba(0,0,0,0.03); padding: 15px; border-radius: 8px; margin: 20px 0; border: 1px solid var(--border-color);
+}
+[data-theme="dark"] #user-info-form, [data-theme="dark"] .user-info-block { background: rgba(255,255,255,0.05); }
+
+/* ============================================================
+   Correções de contraste no PLANO para dark mode 
+   ============================================================ */
+[data-theme="dark"] #mod-plano .tema,
+[data-theme="dark"] #mod-plano .instructions,
+[data-theme="dark"] #mod-plano .user-info-block,
+[data-theme="dark"] #mod-plano .modal-content,
+[data-theme="dark"] #tour-content {
+  background: #ffffff;
+  color: #111;
+  border-color: #cfcfcf;
+}
+[data-theme="dark"] #mod-plano .tema input,
+[data-theme="dark"] #mod-plano .tema textarea,
+[data-theme="dark"] #mod-plano .tema select,
+[data-theme="dark"] #mod-plano .search-bar input,
+[data-theme="dark"] #mod-plano .search-bar select,
+[data-theme="dark"] .eis-form select, 
+[data-theme="dark"] .eis-form input {
+  background: #ffffff;
+  color: #111;
+  border-color: #b5b5b5;
+}
+[data-theme="dark"] #mod-plano input::placeholder,
+[data-theme="dark"] #mod-plano textarea::placeholder { color: #666; }
+        
+[data-theme="dark"] #mod-plano h2,
+[data-theme="dark"] #mod-plano h3,
+[data-theme="dark"] #mod-plano label[for="lembreteData"] {
+  color: #ffffff;
+}
+[data-theme="dark"] #mod-plano .tema label { color: #111; }
+
+/* --- EISENHOWER --- */
+.eis-tabs { display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+.eis-tab { padding: 8px 16px; border: none; background: transparent; cursor: pointer; color: var(--text-color); font-weight: 600; }
+.eis-tab.active { border-bottom: 3px solid var(--primary-color); color: var(--primary-color); }
+
+.eis-form { display: grid; gap: 10px; grid-template-columns: 1fr; margin-bottom: 20px; background: rgba(0,0,0,0.02); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
+@media(min-width: 600px) { .eis-form { grid-template-columns: 2fr 1fr 1fr auto; align-items: end; } }
+
+.eis-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
+.quadrant { padding: 15px; border-radius: 8px; min-height: 200px; display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.1); }
+.quadrant h4 { margin: 0 0 10px 0; font-size: 0.9rem; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; }
+.q-content { flex-grow: 1; list-style: none; padding: 0; margin: 0; }
+.eis-task { background: rgba(255,255,255,0.7); padding: 8px; margin-bottom: 6px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; box-shadow: 0 1px 2px rgba(0,0,0,0.05); color: #333; }
+.eis-task button { background: none; border: none; cursor: pointer; font-size: 1.1em; color: var(--danger-color); padding: 0 0 0 10px; }
+
+/* Cores dos Quadrantes */
+#q1-box { background-color: var(--eis-q1); color: var(--eis-q1-text); }
+#q1-box h4 { color: var(--eis-q1-text); border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px;}
+#q2-box { background-color: var(--eis-q2); color: var(--eis-q2-text); }
+#q2-box h4 { color: var(--eis-q2-text); border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px;}
+#q3-box { background-color: var(--eis-q3); color: var(--eis-q3-text); }
+#q3-box h4 { color: var(--eis-q3-text); border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px;}
+#q4-box { background-color: var(--eis-q4); color: var(--eis-q4-text); }
+#q4-box h4 { color: var(--eis-q4-text); border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px;}
+
+/* Diagnóstico */
+.diag-alert { color: var(--danger-color); font-weight: bold; margin-bottom: 5px; }
+.diag-ok { color: var(--success-color); font-weight: bold; margin-bottom: 5px; }
+.diag-box { padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); margin-bottom: 15px; }
+
+/* --- Impressão --- */
+@media print {
+  .nav-bar, header, .credits, #dashboard, #tour-modal, .eis-tabs, .eis-form, .action-btn, #pc-theme-btn { display: none !important; }
+  body { padding: 0; background: #fff; color: #000; }
+  .card { box-shadow: none; border: none; }
+  .eis-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .quadrant { border: 1px solid #999; page-break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ==== Animações splash ==== */
+@keyframes pulse { 0%{transform:scale(1);opacity:.8} 50%{transform:scale(1.1);opacity:1} 100%{transform:scale(1);opacity:.8} }
+@keyframes loading { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
+
+/* ==== [NOVO] Barras/Resultados do teste de temperamento ==== */
+.temp-scorebar { display:grid; grid-template-columns:140px 1fr 48px; gap:10px; align-items:center; margin:6px 0; }
+.temp-bar { height:10px; background:#eaeef2; border:1px solid #dfe6ec; border-radius:999px; overflow:hidden; }
+.temp-bar > i { display:block; height:100%; width:0%; background: var(--primary-color); }
+.temp-mini { font-size: .9rem; opacity:.8; }
+.temp-block { text-align:left; background: rgba(0,0,0,0.03); border:1px dashed var(--border-color); padding:10px; border-radius:8px; margin-top:8px; }
+[data-theme="dark"] .temp-block { background: rgba(255,255,255,0.05); }
+  </style>
+</head>
+<body>
+  <!-- Splash -->
+<div id="splash-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000000; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999; transition: opacity 0.5s ease;">
+    <div style="font-size: 80px; margin-bottom: 20px; animation: pulse 2s infinite;">🐯</div>
+    <h1 style="color:white; font-family: sans-serif; letter-spacing: 5px; margin:0;">LINCE</h1>
+    <p style="color:#e67e22; font-family: sans-serif; font-size: 0.8rem; margin-top: 10px; text-transform: uppercase;">Programa Escalada REPLAN</p>
+    <div style="width: 150px; height: 2px; background: rgba(255,255,255,0.1); margin-top: 30px; border-radius: 2px; overflow: hidden;">
+      <div style="width: 100%; height: 100%; background: #e67e22; animation: loading 1.5s infinite;"></div>
+    </div>
+</div>
+
+  <button id="pc-theme-btn" onclick="toggleTheme()">🌓 Tema</button>
+
+  <header>
+    <div class="header-content">
+      <div style="display: flex; align-items: center;">
+        <span class="app-icon">🐯</span>
+        <div>
+          <h1>LINCE</h1>
+          <p>
+    Guia Prático de Liderança, Inteligência Interpessoal e Comunicação Eficaz
+  </p>
+        </div>
+      </div>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+  </header>
+
+  <div class="container app-header-pc">
+    <h1>LINCE</h1>
+    <p style="color: var(--text-color); opacity: 0.8;">Guia Prático de Liderança, Inteligência Interpessoal e Comunicação Eficaz</p>
+  </div>
+
+  <div class="container">
+    <div class="pilula-box" id="daily-quote"></div>
+  </div>
+
+  <div id="dashboard" class="container" style="display:none;">
+    <div class="card">
+      <h2>📊 Dashboard de Indicadores</h2>
+      <canvas id="chartPlano" aria-label="Gráfico de status dos temas do plano" role="img"></canvas>
+      <div id="dashboard-info"></div>
+    </div>
+  </div>
+
+  <div id="mod-home" class="module active container">
+    <div style="text-align: center; margin: 20px 0 30px 0;">
+      <span style="font-size: 50px;">🐯</span>
+      <h2 style="border:none; margin-bottom:5px;">Painel LINCE</h2>
+      <p style="font-size: 0.9rem; opacity: 0.8;">Selecione uma ferramenta de liderança:</p>
+    </div>
+
+    <div class="vertical-menu">
+      <div class="menu-card" onclick="changeTab('mod-teste', document.querySelector('.nav-item:nth-child(1)'))">
+        <span class="menu-icon">🧠</span>
+        <div class="menu-text">
+          <strong>Autoconhecimento</strong>
+          <span>Teste de Temperamento</span>
+        </div>
+        <span class="menu-arrow">❯</span>
+      </div>
+
+      <div class="menu-card" onclick="changeTab('mod-checklist', document.querySelector('.nav-item:nth-child(2)'))">
+        <span class="menu-icon">🛠️</span>
+        <div class="menu-text">
+          <strong>Preparação</strong>
+          <span>Checklist e Roteiros</span>
+        </div>
+        <span class="menu-arrow">❯</span>
+      </div>
+
+      <div class="menu-card" onclick="changeTab('mod-eisenhower', document.querySelector('.nav-item:nth-child(3)'))">
+        <span class="menu-icon">⏳</span>
+        <div class="menu-text">
+          <strong>Gestão do Tempo</strong>
+          <span>Matriz de Eisenhower</span>
+        </div>
+        <span class="menu-arrow">❯</span>
+      </div>
+
+      <div class="menu-card" onclick="changeTab('mod-treinamento', document.querySelector('.nav-item:nth-child(4)'))">
+        <span class="menu-icon">🎮</span>
+        <div class="menu-text">
+          <strong>Simulador</strong>
+          <span>Treino de Situações Reais</span>
+        </div>
+        <span class="menu-arrow">❯</span>
+      </div>
+
+      <div class="menu-card" onclick="changeTab('mod-plano', document.querySelector('.nav-item:nth-child(5)'))">
+        <span class="menu-icon">🎯</span>
+        <div class="menu-text">
+          <strong>Plano de Ação</strong>
+          <span>Plano de Desenvolvimento</span>
+        </div>
+        <span class="menu-arrow">❯</span>
+      </div>
+<div style="margin: 20px 15px;">
+    <a href="https://raw.githubusercontent.com/dirceusaxfiel-del/e-book/main/Cartilha.pdf" 
+       target="_blank"
+       download="Cartilha_LINCE.pdf" 
+       class="action-btn" 
+       style="text-decoration:none; border: 2px solid #e67e22; color: #e67e22; background: transparent; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; padding: 12px; border-radius: 8px;">
+       📥 DOWNLOAD e-book_LINCE
+    </a>
+</div>
+</div>
+    </div>
+  </div>
+
+  <!-- AUTOCONHECIMENTO -->
+  <div id="mod-teste" class="module container" hidden>
+    <div class="card">
+      <button class="btn-back" onclick="voltarInteligente()">
+  <span>🏠</span> Voltar
+</button>
+         
+      <h2>🧠 Autoconhecimento</h2>
+
+      <div id="autoc_tabs" style="display:flex; flex-direction: column; gap:8px; margin-bottom:20px;">
+        <!-- [ALTERADO] Atualizei a legenda para 16 perguntas -->
+        <button class="action-btn secondary-btn" id="tab_resumo" onclick="showAutocTab('resumo')">📚 Os 4 Temperamentos</button>
+        <button class="action-btn secondary-btn" id="tab_goleman" onclick="showAutocTab('goleman')">🧑‍💼 Estilos de Liderança</button>
+      </div>
+
+      <!-- =========================================================
+           [NOVO] Teste 4 Temperamentos – 16 perguntas (4 alternativas)
+           - Cada alternativa mapeia: SANG | COL | MEL | FLE
+           - Mantida a etapa de identificação (nome/e-mail)
+           ========================================================= -->
+      <div id="autoc_tab_temperamento" class="autoc_tab">
+        <h3 style="margin-top:0;">🧩 Teste de Temperamento <span id="badge-teste" class="badge" style="display:none;">✔️ Concluído</span></h3>
+
+        <div id="intro-screen">
+          <p>Descubra qual temperamento mais se destaca no seu perfil de liderança e como potencializar sua colaboração em conflitos.</p>
+          <div id="user-info-form">
+            <h3 style="margin-top:0; font-size:1rem;">Identificação do Líder</h3>
+            <label for="userName">Nome:</label>
+            <input type="text" id="userName" placeholder="Digite seu nome completo" required />
+            <label for="userEmail">e-mail:</label>
+            <input type="email" id="userEmail" placeholder="seu@email.com.br" required />
+            <button class="action-btn" onclick="validateUserInfo()">Continuar para o Teste</button>
+            <p id="form-error" style="color: var(--danger-color); display:none; margin-top:10px; font-weight:bold;">⚠️ Por favor, preencha o nome e um e-mail válido.</p>
+          </div>
+        </div>
+
+        <!-- ===== INÍCIO DO NOVO QUIZ ===== -->
+        <div id="quiz-form" style="display:none;">
+          <div class="pilula-box" style="margin-bottom:15px;">
+            Responda considerando seu comportamento mais espontâneo no contexto REPLAN.<br>O teste é <strong>confidencial</strong> e serve para apoiar seu desenvolvimento.
+          </div>
+
+          <form id="temperamentForm">
+            <div class="section-title">PARTE ÚNICA: Situações de liderança e colaboração</div>
+
+            <!-- 16 QUESTÕES | 4 alternativas -->
+            <div class="question">
+              <p>1) Em um desentendimento entre áreas, meu primeiro impulso é:</p>
+              <label><input type="radio" name="q1" value="SANG" required> Criar clima leve, conectar as pessoas e facilitar o diálogo.</label>
+              <label><input type="radio" name="q1" value="COL"> Definir objetivo, priorizar e direcionar ações com rapidez.</label>
+              <label><input type="radio" name="q1" value="MEL"> Buscar fatos, entender causas e escolher a solução mais correta.</label>
+              <label><input type="radio" name="q1" value="FLE"> Ouvir todos com calma e construir um acordo estável.</label>
+            </div>
+
+            <div class="question">
+              <p>2) Sob pressão de tempo e segurança de processo, eu costumo:</p>
+              <label><input type="radio" name="q2" value="COL" required> Decidir com 70–80% de informação e cobrar execução.</label>
+              <label><input type="radio" name="q2" value="MEL"> Checar riscos e normas antes de autorizar qualquer ação.</label>
+              <label><input type="radio" name="q2" value="SANG"> Engajar rapidamente o time e manter a energia alta.</label>
+              <label><input type="radio" name="q2" value="FLE"> Acalmar o ambiente e organizar o passo a passo.</label>
+            </div>
+
+            <div class="question">
+              <p>3) Quando preciso dar um feedback difícil, eu:</p>
+              <label><input type="radio" name="q3" value="SANG" required> Começo valorizando, reforço o relacionamento e avanço para o ponto.</label>
+              <label><input type="radio" name="q3" value="COL"> Vou direto ao que precisa mudar e estabeleço metas claras.</label>
+              <label><input type="radio" name="q3" value="MEL"> Levo evidências, exemplos e critérios objetivos.</label>
+              <label><input type="radio" name="q3" value="FLE"> Busco um tom calmo, empático e foco em melhorias gradativas.</label>
+            </div>
+
+            <div class="question">
+              <p>4) Em reuniões de alinhamento interáreas, eu normalmente:</p>
+              <label><input type="radio" name="q4" value="MEL" required> Preparo pauta, dados e critérios de decisão antecipadamente.</label>
+              <label><input type="radio" name="q4" value="SANG"> Estimulo participação e conecto pontos entre as áreas.</label>
+              <label><input type="radio" name="q4" value="FLE"> Escuto e ajudo a construir consenso prático.</label>
+              <label><input type="radio" name="q4" value="COL"> Foco na decisão, corto desvios e fecho encaminhamentos.</label>
+            </div>
+
+            <div class="question">
+              <p>5) Diante de conflitos recorrentes no time, minha tendência é:</p>
+              <label><input type="radio" name="q5" value="FLE" required> Mediar com paciência e criar acordos estáveis.</label>
+              <label><input type="radio" name="q5" value="COL"> Confrontar a causa raiz e responsabilizar rapidamente.</label>
+              <label><input type="radio" name="q5" value="MEL"> Analisar padrões, processos e indicadores para prevenir.</label>
+              <label><input type="radio" name="q5" value="SANG"> Promover integração e rituais de time.</label>
+            </div>
+
+            <div class="question">
+              <p>6) Ao delegar em turnos, eu costumo:</p>
+              <label><input type="radio" name="q6" value="COL" required> Definir metas claras, prazos e cobrança firme.</label>
+              <label><input type="radio" name="q6" value="SANG"> Engajar e motivar, explicando o “porquê”.</label>
+              <label><input type="radio" name="q6" value="FLE"> Alinhar expectativas e acompanhar com suporte.</label>
+              <label><input type="radio" name="q6" value="MEL"> Detalhar critérios, riscos e qualidade esperada.</label>
+            </div>
+
+            <div class="question">
+              <p>7) Frente a mudanças de prioridade, minha reação natural é:</p>
+              <label><input type="radio" name="q7" value="SANG" required> Adapto rápido e mantenho o ânimo.</label>
+              <label><input type="radio" name="q7" value="FLE"> Estabilizo o fluxo e reorganizo com serenidade.</label>
+              <label><input type="radio" name="q7" value="COL"> Replanejo metas e redireciono recursos com rapidez.</label>
+              <label><input type="radio" name="q7" value="MEL"> Solicito justificativas, impactos e critérios antes de mudar.</label>
+            </div>
+
+            <div class="question">
+              <p>8) Ao tratar de segurança e risco operacional, eu priorizo:</p>
+              <label><input type="radio" name="q8" value="MEL" required> Compliance estrito e análise minuciosa.</label>
+              <label><input type="radio" name="q8" value="COL"> Decisões firmes e ação rápida para eliminar o risco.</label>
+              <label><input type="radio" name="q8" value="FLE"> Disciplina operacional e constância.</label>
+              <label><input type="radio" name="q8" value="SANG"> Conscientização, comunicação clara e engajamento.</label>
+            </div>
+
+            <div class="question">
+              <p>9) Quando o time erra, eu tendo a:</p>
+              <label><input type="radio" name="q9" value="FLE" required> Entender o contexto e apoiar a retomada com calma.</label>
+              <label><input type="radio" name="q9" value="SANG"> Reforçar aprendizados e recuperar a confiança.</label>
+              <label><input type="radio" name="q9" value="MEL"> Revisar causa raiz, padrões e controles.</label>
+              <label><input type="radio" name="q9" value="COL"> Corrigir de imediato e ajustar responsabilidades.</label>
+            </div>
+
+            <div class="question">
+              <p>10) Para manter a motivação do time, eu invisto em:</p>
+              <label><input type="radio" name="q10" value="SANG" required> Reconhecimento público e comunicação inspiradora.</label>
+              <label><input type="radio" name="q10" value="FLE"> Rotina sustentável, suporte e respeito.</label>
+              <label><input type="radio" name="q10" value="COL"> Metas desafiadoras e vitórias rápidas.</label>
+              <label><input type="radio" name="q10" value="MEL"> Critérios claros, qualidade e propósito do trabalho.</label>
+            </div>
+
+            <div class="question">
+              <p>11) Em desacordos duros, meu papel preferido é:</p>
+              <label><input type="radio" name="q11" value="COL" required> Líder que decide e destrava.</label>
+              <label><input type="radio" name="q11" value="SANG"> Articulador que reconecta as pessoas.</label>
+              <label><input type="radio" name="q11" value="MEL"> Analista que garante justiça e coerência.</label>
+              <label><input type="radio" name="q11" value="FLE"> Mediador que estabiliza e compõe.</label>
+            </div>
+
+            <div class="question">
+              <p>12) Minha comunicação é mais frequentemente:</p>
+              <label><input type="radio" name="q12" value="COL" required> Direta, objetiva e orientada à ação.</label>
+              <label><input type="radio" name="q12" value="SANG"> Envolvente, entusiasta e relacional.</label>
+              <label><input type="radio" name="q12" value="MEL"> Precisa, detalhada e fundamentada.</label>
+              <label><input type="radio" name="q12" value="FLE"> Calma, respeitosa e conciliadora.</label>
+            </div>
+
+            <div class="question">
+              <p>13) Se preciso mudar um procedimento, eu:</p>
+              <label><input type="radio" name="q13" value="MEL" required> Reviso evidências e impacto em qualidade/segurança.</label>
+              <label><input type="radio" name="q13" value="COL"> Avalio custo/benefício e implemento rapidamente.</label>
+              <label><input type="radio" name="q13" value="FLE"> Amplio a escuta e preparo a transição suave.</label>
+              <label><input type="radio" name="q13" value="SANG"> Mobilizo patrocínio e engajamento das equipes.</label>
+            </div>
+
+            <div class="question">
+              <p>14) Em projetos longos, mantenho o foco principalmente por meio de:</p>
+              <label><input type="radio" name="q14" value="FLE" required> Cadência, rotina clara e previsibilidade.</label>
+              <label><input type="radio" name="q14" value="SANG"> Comunicação positiva e propósito compartilhado.</label>
+              <label><input type="radio" name="q14" value="MEL"> Indicadores, marcos e qualidade.</label>
+              <label><input type="radio" name="q14" value="COL"> Metas agressivas e cobrança por resultado.</label>
+            </div>
+
+            <div class="question">
+              <p>15) Ao integrar novos membros ao time, meu foco inicial é:</p>
+              <label><input type="radio" name="q15" value="SANG" required> Conexão humana, acolhimento e cultura.</label>
+              <label><input type="radio" name="q15" value="MEL"> Padrões, compliance e qualidade técnica.</label>
+              <label><input type="radio" name="q15" value="COL"> Metas de rampa e entregas iniciais.</label>
+              <label><input type="radio" name="q15" value="FLE"> Segurança psicológica e suporte no dia a dia.</label>
+            </div>
+
+            <div class="question">
+              <p>16) Em um impasse prolongado, meu movimento para avançar é:</p>
+              <label><input type="radio" name="q16" value="COL" required> Decidir e assumir riscos calculados para destravar.</label>
+              <label><input type="radio" name="q16" value="FLE"> Reaproximar posições e firmar compromissos.</label>
+              <label><input type="radio" name="q16" value="MEL"> Revisar premissas, buscar dados e replanejar.</label>
+              <label><input type="radio" name="q16" value="SANG"> Renovar energia, comunicar benefícios e mobilizar adesão.</label>
+            </div>
+
+            <button type="button" class="action-btn" onclick="calculateResult()">Ver Resultado Análise</button>
+          </form>
+        </div>
+        <!-- ===== FIM DO NOVO QUIZ ===== -->
+
+        <!-- ===== RESULTADO ===== -->
+        <div id="result-screen" style="display:none;" class="result-box">
+          <span style="font-size: 50px;">🎯</span>
+          <div class="result-title" id="final-temperament"></div>
+          <p id="final-desc"></p>
+
+          <!-- Quebra em percentuais -->
+          <div id="final-breakdown" style="text-align:left; margin-top:10px;"></div>
+
+<div id="final-blocks"></div>
+
+     
+    <!-- Blocos por temperamento predominante -->
+          <div id="final-blocks"></div>
+
+          <button class="action-btn secondary-btn" style="background-color: var(--secondary-color);" onclick="sendEmailResult()">📧 Enviar Resultado por e-mail</button>
+          <button class="action-btn" onclick="resetTest()">Refazer Teste</button>
+        </div>
+      </div>
+
+      <!-- ====== Resumo Técnico (mantido) ====== -->
+      <div id="autoc_tab_resumo" class="autoc_tab" style="display:none;">
+        <h3 style="margin-top:0;">Os Quatro Temperamentos</h3>
+        <p style="font-size:0.9rem; opacity:0.8; margin-bottom:20px;">
+          Resumo técnico para líderes baseada na teoria clássica (Hipócrates/Galeno/Jung).
+        </p>
+
+        <div style="background: var(--bg-color); padding: 15px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 20px;">
+          <p style="margin:0;">A teoria propõe que as pessoas apresentam padrões de comportamento classificados em Colérico, Sanguíneo, Melancólico e Fleumático. Compreendê-los é vital para alocar talentos e melhorar a comunicação.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+          
+          <div class="card" style="padding: 15px; border-left: 5px solid #e74c3c;">
+            <h4 style="margin: 0 0 10px 0; color: #c0392b;">🔥 1. Colérico (Executor)</h4>
+            <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; line-height: 1.5;">
+              <li><strong>Características:</strong> Determinação, liderança, energia, foco em resultados.</li>
+              <li><strong>Pontos Fortes:</strong> Proatividade, coragem, capacidade de motivar.</li>
+              <li><strong>Desafios:</strong> Autoritarismo, impaciência, dificuldade em ouvir.</li>
+            </ul>
+            <div style="margin-top: 10px; background: rgba(231, 76, 60, 0.1); padding: 8px; border-radius: 4px; font-size: 0.85rem;">
+              <strong>💡 Dica para Líderes:</strong> Desenvolva empatia, flexibilidade e escuta ativa para equilibrar sua assertividade.
+            </div>
+          </div>
+
+          <div class="card" style="padding: 15px; border-left: 5px solid #f1c40f;">
+            <h4 style="margin: 0 0 10px 0; color: #d4ac0d;">✨ 2. Sanguíneo (Comunicador)</h4>
+            <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; line-height: 1.5;">
+              <li><strong>Características:</strong> Entusiasmo, sociabilidade, adaptabilidade, bom humor.</li>
+              <li><strong>Pontos Fortes:</strong> Comunicação, motivação de equipes, criatividade.</li>
+              <li><strong>Desafios:</strong> Impulsividade, dispersão, falta de foco.</li>
+            </ul>
+            <div style="margin-top: 10px; background: rgba(241, 196, 15, 0.1); padding: 8px; border-radius: 4px; font-size: 0.85rem;">
+              <strong>💡 Dica para Líderes:</strong> Invista em disciplina e organização para potencializar sua energia positiva.
+            </div>
+          </div>
+
+          <div class="card" style="padding: 15px; border-left: 5px solid #3498db;">
+            <h4 style="margin: 0 0 10px 0; color: #2980b9;">🌊 3. Melancólico (Analítico)</h4>
+            <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; line-height: 1.5;">
+              <li><strong>Características:</strong> Sensibilidade, precisão, introspecção, qualidade.</li>
+              <li><strong>Pontos Fortes:</strong> Detalhes, empatia profunda, capacidade analítica.</li>
+              <li><strong>Desafios:</strong> Autocrítica excessiva, perfeccionismo, indecisão.</li>
+            </ul>
+            <div style="margin-top: 10px; background: rgba(52, 152, 219, 0.1); padding: 8px; border-radius: 4px; font-size: 0.85rem;">
+              <strong>💡 Dica para Líderes:</strong> Trabalhe a autoconfiança e aceite a imperfeição como parte do processo.
+            </div>
+          </div>
+
+          <div class="card" style="padding: 15px; border-left: 5px solid #2ecc71;">
+            <h4 style="margin: 0 0 10px 0; color: #27ae60;">🌿 4. Fleumático (Planejador)</h4>
+            <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; line-height: 1.5;">
+              <li><strong>Características:</strong> Equilíbrio, racionalidade, paciência, conciliador.</li>
+              <li><strong>Pontos Fortes:</strong> Mediação, estabilidade emocional, visão sistêmica.</li>
+              <li><strong>Desafios:</strong> Resistência à mudança, passividade, lentidão na decisão.</li>
+            </ul>
+            <div style="margin-top: 10px; background: rgba(46, 204, 113, 0.1); padding: 8px; border-radius: 4px; font-size: 0.85rem;">
+              <strong>💡 Dica para Líderes:</strong> Busque proatividade e assertividade para complementar sua postura equilibrada.
+            </div>
+          </div>
+        </div>
+        
+        <div class="pilula-box" style="margin-top: 20px;">
+          <strong>Aplicação na Liderança:</strong> O autoconhecimento permite compor times complementares e alocar pessoas em funções adequadas ao seu perfil natural.
+        </div>
+      </div>
+
+      <!-- ====== GOLEMAN (mantido) ====== -->
+      <div id="autoc_tab_goleman" class="autoc_tab" style="display:none;">
+        <h3 style="margin-top:0;">Os 6 Estilos de Liderança (Goleman)</h3>
+        <p style="font-size:0.9rem; opacity:0.8; margin-bottom:20px;">
+          Conheça os estilos para ampliar seu repertório de liderança.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+          
+          <div class="card" style="padding: 15px; border-left: 4px solid #f1c40f;">
+            <h4 style="margin: 0 0 5px 0; color: var(--secondary-color);">🔭 Líder Visionário <small>(Authoritative)</small></h4>
+            <p style="margin: 0; font-size: 0.9rem;">Move as pessoas com uma visão clara e inspiradora. Ideal para quando a mudança é necessária, mas não para liderar especialistas.</p>
+          </div>
+
+          <div class="card" style="padding: 15px; border-left: 4px solid #e67e22;">
+            <h4 style="margin: 0 0 5px 0; color: var(--secondary-color);">🤝 Líder Coach <small>(Coaching)</small></h4>
+            <p style="margin: 0; font-size: 0.9rem;">Foca no desenvolvimento pessoal e profissional da equipe, conectando metas individuais às da organização. Ótimo para formar talentos.</p>
+          </div>
+
+          <div class="card" style="padding: 15px; border-left: 4px solid #2ecc71;">
+            <h4 style="margin: 0 0 5px 0; color: var(--secondary-color);">💚 Líder Afiliativo <small>(Affiliative)</small></h4>
+            <p style="margin: 0; font-size: 0.9rem;">Cria harmonia e laços emocionais, valorizando as pessoas e o trabalho em equipe. Bom para curar conflitos e motivar.</p>
+          </div>
+
+          <div class="card" style="padding: 15px; border-left: 4px solid #3498db;">
+            <h4 style="margin: 0 0 5px 0; color: var(--secondary-color);">🗳️ Líder Democrático <small>(Democratic)</small></h4>
+            <p style="margin: 0; font-size: 0.9rem;">Busca consenso e colaboração, valorizando as ideias dos funcionários. Eficaz em construir comprometimento, mas lento para decisões.</p>
+          </div>
+
+          <div class="card" style="padding: 15px; border-left: 4px solid #9b59b6;">
+            <h4 style="margin: 0 0 5px 0; color: var(--secondary-color);">🚀 Líder Pioneiro <small>(Pacesetting)</small></h4>
+            <p style="margin: 0; font-size: 0.9rem;">Exige excelência e alta performance, estabelecendo padrões elevados. Útil para equipes motivadas, mas pode gerar estresse.</p>
+          </div>
+
+          <div class="card" style="padding: 15px; border-left: 4px solid #e74c3c;">
+            <h4 style="margin: 0 0 5px 0; color: var(--secondary-color);">📢 Líder Autoritário <small>(Coercive)</small></h4>
+            <p style="margin: 0; font-size: 0.9rem;">Exige obediência imediata, com diretrizes e metas claras. Eficaz em crises, mas pode destruir a motivação e o clima.</p>
+          </div>
+        </div>
+
+        <div class="pilula-box" style="margin-top: 25px; background-color: #eaf2f8; color: #2c3e50; border-left: 4px solid #2980b9;">
+          <strong>🔑 Ponto Chave:</strong><br>
+          Não existe um estilo único ideal. A <strong>Inteligência Emocional</strong> e a <strong>adaptabilidade</strong> são cruciais para saber quando usar cada um, alternando entre estilos que geram ressonância (positivo) e dissonância (negativo).
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- (duplicata Goleman removida no original — mantemos UM bloco) -->
+
+<div id="mod-checklist" class="module container" hidden>
+    <div class="card">
+      <button class="btn-back" onclick="goHome()">
+        <span>🏠</span> VOLTAR
+      </button>
+
+      <h2>✅ Checklist de Mediação <span id="badge-checklist" class="badge" style="display:none;">✔️ Completo</span></h2>
+      <div class="progress-container" style="background: #eee; border-radius: 10px; height: 10px; margin-bottom: 10px;">
+        <div id="checklist-bar" style="background: var(--success-color); height: 100%; width: 0%; border-radius: 10px; transition: width 0.3s;"></div>
+      </div>
+      <p style="margin-bottom: 20px; font-size: 0.9rem; opacity: 0.8;">Utilize antes, durante e após conversas difíceis.</p>
+
+      <div class="checklist-grid">
+        <div style="margin-bottom: 25px;">
+          <div class="section-title">ANTES DA CONVERSA</div>
+          <div class="checklist-item"><input type="checkbox" id="c1" onchange="checkChecklistBadge()"><label for="c1">Levantar fatos e dados objetivos</label></div>
+          <div class="checklist-item"><input type="checkbox" id="c2" onchange="checkChecklistBadge()"><label for="c2">Identificar impactos</label></div>
+          <div class="checklist-item"><input type="checkbox" id="c3" onchange="checkChecklistBadge()"><label for="c3">Avaliar estado emocional</label></div>
+          <div class="checklist-item"><input type="checkbox" id="c4" onchange="checkChecklistBadge()"><label for="c4">Definir objetivo da conversa</label></div>
+        </div>
+
+        <div style="margin-bottom: 25px;">
+          <div class="section-title">DURANTE A CONVERSA</div>
+          <div class="checklist-item"><input type="checkbox" id="c5" onchange="checkChecklistBadge()"><label for="c5">Iniciar com empatia</label></div>
+          <div class="checklist-item"><input type="checkbox" id="c6" onchange="checkChecklistBadge()"><label for="c6">Tom colaborativo</label></div>
+          <div class="checklist-item"><input type="checkbox" id="c7" onchange="checkChecklistBadge()"><label for="c7">Escuta ativa</label></div>
+          <div class="checklist-item"><input type="checkbox" id="c8" onchange="checkChecklistBadge()"><label for="c8">Focar interesses comuns</label></div>
+        </div>
+
+        <div style="margin-bottom: 25px;">
+          <div class="section-title">APÓS A CONVERSA</div>
+          <div class="checklist-item"><input type="checkbox" id="c9" onchange="checkChecklistBadge()"><label for="c9">Plano de ação com prazos</label></div>
+          <div class="checklist-item"><input type="checkbox" id="c10" onchange="checkChecklistBadge()"><label for="c10">Comunicar decisões</label></div>
+          <div class="checklist-item"><input type="checkbox" id="c11" onchange="checkChecklistBadge()"><label for="c11">Monitorar ações</label></div>
+        </div>
+      </div>
+
+      <div class="pilula-box" style="background-color: #d4edda; color: #155724; border-left: 4px solid #28a745; padding: 15px; border-radius: 8px;">
+        <strong>💡 Dicas Rápidas:</strong><br />
+        <span style="font-size: 0.85rem;">Mantenha a calma • Ataque o problema, não a pessoa • Valorize diferenças • Conflito = Oportunidade</span>
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 30px 0;" />
+
+      <h2 style="border: none; margin-bottom: 5px;">💬 Roteiros de Conversas</h2>
+      <p style="margin-bottom: 20px; font-size: 0.9rem; opacity: 0.8;">Estruturas baseadas no método LINCE.</p>
+      <div id="conversations-container"></div>
+    </div>
+  </div>
+
+  <!-- EISENHOWER -->
+  <div id="mod-eisenhower" class="module container" hidden>
+    <div class="card">
+         <button class="btn-back" onclick="goHome()"><span>🏠</span> Voltar</button>
+      <h2 style="color: var(--primary-color);">Matriz de Eisenhower</h2>
+
+      <div class="eis-tabs">
+        <button class="eis-tab active" onclick="switchEisTab(event, 'matrix')">Matriz</button>
+        <button class="eis-tab" onclick="switchEisTab(event, 'report')">Relatório &amp; Diagnóstico</button>
+      </div>
+
+      <div id="eis-tab-matrix">
+        <div class="eis-form">
+          <div>
+            <input type="text" id="eisTaskName" placeholder="Nova tarefa..." aria-label="Nome da tarefa" />
+          </div>
+          <div>
+            <select id="eisImportance" aria-label="Importância">
+              <option value="high">Importância Alta</option>
+              <option value="low">Importância Baixa</option>
+            </select>
+          </div>
+          <div>
+            <select id="eisUrgency" aria-label="Urgência">
+              <option value="high">Urgência Alta</option>
+              <option value="low">Urgência Baixa</option>
+            </select>
+          </div>
+          <div>
+            <button class="action-btn" style="margin-top:0;" onclick="addEisTask()">Adicionar</button>
+          </div>
+        </div>
+
+        <div class="eis-grid">
+          <div class="quadrant" id="q1-box">
+            <h4>🔥 Q1: Urgente &amp; Importante <span id="count-q1">0</span></h4>
+            <p style="font-size:0.75em; opacity:0.8; margin-top:0;">Crise / Faça Agora</p>
+            <ul id="list-q1" class="q-content"></ul>
+          </div>
+          <div class="quadrant" id="q2-box">
+            <h4>📅 Q2: Não Urgente &amp; Importante <span id="count-q2">0</span></h4>
+            <p style="font-size:0.75em; opacity:0.8; margin-top:0;">Planejamento / Agende</p>
+            <ul id="list-q2" class="q-content"></ul>
+          </div>
+          <div class="quadrant" id="q3-box">
+            <h4>🏃 Q3: Urgente &amp; Não Importante <span id="count-q3">0</span></h4>
+            <p style="font-size:0.75em; opacity:0.8; margin-top:0;">Interrupção / Delegue</p>
+            <ul id="list-q3" class="q-content"></ul>
+          </div>
+          <div class="quadrant" id="q4-box">
+            <h4>🗑️ Q4: Não Urg. &amp; Não Imp. <span id="count-q4">0</span></h4>
+            <p style="font-size:0.75em; opacity:0.8; margin-top:0;">Distração / Elimine</p>
+            <ul id="list-q4" class="q-content"></ul>
+          </div>
+        </div>
+        
+<div style="margin-top: 20px; display: flex; gap: 10px;">
+          <button class="action-btn btn-acao-azul" style="flex:1;" onclick="exportEisReport()">
+            🖨️ Imprimir / PDF
+          </button>
+          <button class="action-btn btn-acao-azul" style="flex:1;" onclick="clearEisMatrix()">
+            Limpar Tudo
+          </button>
+        </div>
+      </div>
+
+      <div id="eis-tab-report" style="display: none;">
+        <div class="diag-box">
+          <h3>Diagnóstico Automático</h3>
+          <div id="eis-diagnosis-content">
+            <p>Adicione tarefas para gerar o diagnóstico.</p>
+          </div>
+        </div>
+        
+        <div class="diag-box">
+          <h3>Resumo das Tarefas</h3>
+          <div id="eis-summary-text"></div>
+        </div>
+
+        <button class="action-btn" onclick="exportEisReport()">🖨️ Exportar / Imprimir Relatório</button>
+      </div>
+    </div>
+  </div>
+
+<div id="mod-treinamento" class="module container" hidden>
+    <div class="card">
+       <button class="btn-back" onclick="goHome()"><span>🏠</span> Voltar</button>
+
+      <h2>🎮 Simulador Interativo <span id="badge-sim" class="badge" style="display:none;">🎓</span></h2>
+      <p style="font-size: 0.9em; opacity: 0.8;">Tome decisões em um cenário real e receba feedback imediato.</p>
+
+      <div id="sim-start">
+        <h3 style="margin-bottom: 10px;">Selecione o cenário:</h3>
+        
+        <button class="action-btn" onclick="selecionarCenario('Caio')"><span>👨‍🚒 Caio: O Veterano Desmotivado</span><span>🔥</span></button>
+        
+        <button class="action-btn" onclick="selecionarCenario('Ana')"><span>👩🏾‍🔬 Ana: A Analista Sobrecarregada</span><span>🧪</span></button>
+        
+        <button class="action-btn" onclick="selecionarCenario('pedro')"><span>👷🏿 Pedro: O Master Imprudente</span><span>🏗️</span></button> 
+        
+        <button class="action-btn" onclick="selecionarCenario('stela')"><span>🙅‍♀️ Stela: A Resistência Digital</span><span>💻</span></button>
+        
+        <div id="sim-cenario-descricao" style="display:none; background: var(--bg-color); padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid var(--primary-color);"></div>
+        
+        <button class="action-btn" id="btn-iniciar" style="display:none; margin-top:10px; font-weight:bold; background-color: var(--success-color) !important;" onclick="iniciarSimulacao()">
+            Começar Simulação
+        </button>
+      </div>
+
+      <div id="sim-game" style="display:none;">
+        <div class="sim-progress"><div id="sim-bar" class="sim-bar"></div></div>
+        <div id="sim-content"></div>
+        <div id="sim-feedback-box" class="sim-feedback" role="status" aria-live="polite"></div>
+        <div id="sim-next-btn-container" style="display:none;">
+          <button class="action-btn" id="sim-btn-next">Continuar ➡️</button>
+        </div>
+      </div>
+
+      <div id="sim-result" style="display:none;" class="result-box">
+        <span style="font-size: 50px;">📊</span>
+        <div class="result-title" id="sim-final-title"></div>
+        <p id="sim-final-desc"></p>
+        <div class="pilula-box" id="sim-final-tip"></div>
+        <button class="action-btn" onclick="reiniciarSimulacao()">Tentar Novamente</button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANO -->
+  <div id="mod-plano" class="module container" hidden>
+    <div class="card">
+       <button class="btn-back" onclick="goHome()"><span>🏠</span> Voltar</button>
+
+      <h2>🎯 Plano de Ação Colaborativo <span id="badge-plano" class="badge" style="display:none;">🏅</span></h2>
+      <div class="instructions" style="background: #eaf4fc; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 0.98em;">
+        <strong>Instruções:</strong> Preencha os campos abaixo. O progresso é salvo automaticamente.
+      </div>
+
+      <div class="user-info-block">
+        <h3 style="margin-top:0; font-size:1rem;">Identificação do Dono do Plano</h3>
+        <label for="planoUserName">Nome:</label>
+        <input type="text" id="planoUserName" placeholder="Seu nome completo" oninput="autoSavePlano()" autocomplete="name" />
+        <label for="planoUserEmail">e-mail:</label>
+        <input type="email" id="planoUserEmail" placeholder="seu@email.com.br" oninput="autoSavePlano()" autocomplete="email" />
+      </div>
+
+      <div class="search-bar">
+        <input type="text" id="searchTema" placeholder="Buscar tema..." oninput="filtrarTemas()" />
+        <select id="filterStatus" onchange="filtrarTemas()">
+          <option value="">Status</option>
+          <option value="Em andamento">Em andamento</option>
+          <option value="Concluído">Concluído</option>
+          <option value="Pendente">Pendente</option>
+        </select>
+        <select id="filterPrioridade" onchange="filtrarTemas()">
+          <option value="">Prioridade</option>
+          <option value="Alta">Alta</option>
+          <option value="Média">Média</option>
+          <option value="Baixa">Baixa</option>
+        </select>
+      </div>
+
+      <form id="planoForm">
+        <div id="temasContainer"></div>
+        <button type="button" class="btn" onclick="adicionarTema()">Nova Oportunidade</button>
+        <button type="button" class="btn" onclick="window.print()">Imprimir / Salvar PDF</button>
+
+        <h3 style="margin-top:30px;">Lembretes de acompanhamento</h3>
+        <label for="lembreteData">Selecione data e hora para lembrete:</label>
+        <input type="datetime-local" id="lembreteData" />
+        <button type="button" class="btn" onclick="adicionarLembrete()">Adicionar lembrete</button>
+        <div class="lembrete-list" id="lembreteList"></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="tour-modal" role="dialog" aria-modal="true" aria-labelledby="tour-title" style="display:none;">
+    <div id="tour-content">
+      <span id="tour-close" onclick="closeTour()" aria-label="Fechar">&times;</span>
+      <h2 id="tour-title">Bem-vindo ao LINCE!</h2>
+      <ol>
+        <li><b>Autoconhecimento:</b> Teste seu perfil de liderança.</li>
+        <li><b>Preparação:</b> Checklist e scripts para conversas difíceis.</li>
+        <li><b>Gestão Tempo:</b> Matriz de Eisenhower para priorizar tarefas.</li>
+        <li><b>Simulador:</b> Simulador interativo.</li>
+        <li><b>Plano:</b> Crie e acompanhe seus planos de ação.</li>
+      </ol>
+    </div>
+  </div>
+
+<footer class="credits" style="padding: 20px 0; text-align: center;">
+    <div style="font-weight: bold; font-size: 1.0rem; line-height: 1.2;">
+        Programa Escalada 2025/2026
+    </div>
+    
+    <div style="font-weight: bold; font-size: 1.0rem; opacity: 0.9; margin-top: 4px;">
+        Refinaria de Paulínia
+    </div>
+    
+    <div style="margin-top: 15px; font-size: 0.8rem; opacity: 0.6; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 10px; display: inline-block; min-width: 200px;">
+        Desenvolvido por:<br> <strong>Dirceu Soares de Souza<br>REPLAN/SMS/SO</strong>
+    </div>
+</footer>
+
+  <script>
+(() => {
+  // ========= THEME =========
+  function toggleTheme() {
+    const body = document.body;
+    const current = body.getAttribute('data-theme');
+    if (current === 'dark') {
+      body.removeAttribute('data-theme');
+      localStorage.setItem('linceTheme', 'light');
+    } else {
+      body.setAttribute('data-theme', 'dark');
+      localStorage.setItem('linceTheme', 'dark');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Lógica do Tema
+    const savedTheme = localStorage.getItem('linceTheme');
+    if (savedTheme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+    } else if (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.setAttribute('data-theme', 'dark');
+    }
+
+    // 2. Lógica da Splash Screen
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      setTimeout(() => {
+        splash.style.opacity = '0';
+        setTimeout(() => splash.remove(), 500); 
+      }, 1500);
+    }
+  });
+
+  // ========= NAV / TABS =========
+  let chartJsLoaded = false;
+  function ensureChartJs() {
+    if (chartJsLoaded) return Promise.resolve();
+    return new Promise((res, rej) => {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+      s.onload = () => { chartJsLoaded = true; res(); };
+      s.onerror = rej;
+      document.head.appendChild(s);
+    });
+  }
+
+function changeTab(tabId, navElement) {
+    // 1. Esconde a Home e todos os outros módulos
+    document.getElementById('mod-home').style.display = 'none';
+    document.querySelectorAll('.module').forEach(el => {
+      el.style.display = 'none';
+      el.classList.remove('active');
+      el.setAttribute('hidden', ''); 
+    });
+
+    // 2. Mostra o módulo desejado
+    const target = document.getElementById(tabId);
+    if (target) {
+      target.style.display = 'block';
+      target.classList.add('active');
+      target.removeAttribute('hidden');
+    }
+
+    // === [CORREÇÃO] RESET DO ESTADO DO TESTE ===
+    // Se a aba clicada for a do teste ('mod-teste'), forçamos a volta para a introdução
+    if (tabId === 'mod-teste') {
+        // Mostra a tela de introdução (onde pede nome/email)
+        document.getElementById('intro-screen').style.display = 'block';
+        
+        // Esconde o Quiz e o Resultado se estiverem abertos
+        document.getElementById('quiz-form').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'none';
+        
+        // Opcional: Limpa as seleções dos botões de rádio para começar do zero
+        const form = document.getElementById('temperamentForm');
+        if (form) form.reset();
+    }
+    // ============================================
+
+    // 4. Marca o item do menu como ativo
+    if (navElement) {
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+      navElement.classList.add('active');
+    }
+
+    // 5. Dashboard (carrega Chart.js se necessário)
+    const showDash = (tabId === 'mod-plano');
+    const dashEl = document.getElementById('dashboard');
+    if (dashEl) dashEl.style.display = showDash ? 'block' : 'none';
+    
+    if (showDash) {
+      ensureChartJs().then(() => {
+        if (typeof atualizarDashboard === 'function') atualizarDashboard();
+      }).catch(() => {});
+    }
+
+    // 6. Estado persistente
+    sessionStorage.setItem('linceActiveTab', tabId);
+    document.body.setAttribute('data-active-tab', tabId);
+
+    window.scrollTo(0, 0);
+  }
+
+  function goHome() {
+    document.querySelectorAll('.module').forEach(el => {
+      el.style.display = 'none';
+      el.classList.remove('active');
+      el.setAttribute('hidden',''); // <-- garante oculto
+    });
+    const home = document.getElementById('mod-home');
+    home.style.display = 'block';
+    home.classList.add('active');
+    home.removeAttribute('hidden'); // <-- garante visível
+
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+    sessionStorage.removeItem('linceActiveTab');
+    document.body.removeAttribute('data-active-tab');
+    document.getElementById('dashboard').style.display = 'none';
+    window.scrollTo(0,0);
+  }
+
+// Função para voltar ao quiz mantendo as respostas marcadas
+function returnToQuiz() {
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('quiz-form').style.display = 'block';
+  
+  // Rola a tela para o topo do formulário para facilitar
+  document.getElementById('intro-screen').scrollIntoView({ behavior: 'smooth' });
+}
+
+function voltarInteligente() {
+  // Verifica se a tela principal do teste (temperamento) está visível
+  const abaPrincipal = document.getElementById('autoc_tab_temperamento');
+  
+  // Se a aba principal JÁ estiver visível...
+  if (abaPrincipal.style.display !== 'none') {
+    // ...então o usuário quer sair do módulo e ir para a Home
+    goHome(); 
+  } else {
+    // ...caso contrário (está lendo texto), volta para a tela do teste
+    showAutocTab('temperamento');
+  }
+}
+
+// Expõe a função para o HTML usar
+window.voltarInteligente = voltarInteligente;
+
+// Não esqueça de expor a função para o HTML usar
+window.returnToQuiz = returnToQuiz;
+
+  // Restaura aba ativa
+  document.addEventListener('DOMContentLoaded', () => {
+    const tab = sessionStorage.getItem('linceActiveTab');
+    if (tab) {
+      const el = [...document.querySelectorAll('.nav-item')]
+        .find(n => n.getAttribute('onclick')?.includes(tab));
+      if (el) changeTab(tab, el);
+    } else {
+      document.getElementById('mod-home').classList.add('active');
+      document.getElementById('mod-home').style.display = 'block';
+      document.body.removeAttribute('data-active-tab');
+    }
+  });
+
+  // ========= TESTE (Temperamento) =========
+  function validateUserInfo() {
+    const name = document.getElementById('userName').value.trim();
+    const email = document.getElementById('userEmail').value.trim();
+    const errorMsg = document.getElementById('form-error');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (name.length < 3 || !emailRegex.test(email)) {
+      errorMsg.style.display = 'block';
+      return;
+    }
+
+    errorMsg.style.display = 'none';
+    sessionStorage.setItem('linceUserName', name);
+    sessionStorage.setItem('linceUserEmail', email);
+    document.getElementById('intro-screen').style.display = 'none';
+    document.getElementById('quiz-form').style.display = 'block';
+  }
+
+  function resetTest() {
+    document.getElementById('temperamentForm').reset();
+    document.getElementById('result-screen').style.display = 'none';
+    document.getElementById('quiz-form').style.display = 'block';
+  }
+
+  function sendEmailResult() {
+    const res = document.getElementById('final-temperament').innerText;
+    const desc = document.getElementById('final-desc').innerText;
+    const name = sessionStorage.getItem('linceUserName') || "";
+    const email = sessionStorage.getItem('linceUserEmail') || "";
+    const body = `Olá ${name},\n\nResultado LINCE: ${res}\n\n${desc}\n\n${document.getElementById('final-breakdown').innerText}`;
+    window.location.href = `mailto:${email}?subject=Resultado LINCE&body=${encodeURIComponent(body)}`;
+  }
+
+  // ========= CHECKLIST BAR =========
+  function checkChecklistBadge() {
+    const total = 11;
+    let checked = 0;
+    for (let i = 1; i <= total; i++) { if (document.getElementById('c'+i).checked) checked++; }
+    const percent = (checked / total) * 100;
+    document.getElementById('checklist-bar').style.width = percent + '%';
+    document.getElementById('badge-checklist').style.display = checked === total ? 'inline-block' : 'none';
+  }
+
+  // ========= CONVERSAS =========
+  const conversationsData = [
+    { title: "Feedback de Desempenho Insatisfatório", objective: "Alinhar resultados sem desmotivar", riscos: "Ser duro demais, rotular, comparar", fundamentos: "Observar sem julgar • Expressar impacto • Propor caminhos", exemplo: "“Tenho notado que as entregas dos relatórios têm atrasado. Isso impacta a segurança das operações. Como podemos resolver juntos?”" },
+    { title: "Delegação de Tarefa Complexa", objective: "Garantir entendimento e compromisso", riscos: "Microgerenciar ou abandonar", fundamentos: "Clareza • Checagem de entendimento • Apoio", exemplo: "“Este projeto é vital para a meta do mês. Quero que você lidere. Como você planeja começar e de que apoio precisa?”" },
+    { title: "Mediação de Conflito entre Pares", objective: "Restaurar a colaboração", riscos: "Tomar partido, minimizar o conflito", fundamentos: "Escuta ativa • Foco no problema • Acordo mútuo", exemplo: "“Percebo que há um impasse sobre o cronograma. Vamos focar no objetivo comum: entregar com qualidade. O que cada um sugere?”" },
+    { title: "Comunicar Mudança Indesejada", objective: "Manter o engajamento apesar da notícia", riscos: "Omitir informações, minimizar sentimentos", fundamentos: "Transparência • Empatia • Visão de futuro", exemplo: "“A decisão da diretoria mudou. Sei que é frustrante pois trabalhamos muito nisso. Vamos discutir como nos adaptar da melhor forma.”" },
+    { title: "Negativa de Promoção", objective: "Manter a motivação e focar no desenvolvimento", riscos: "Desmotivar, parecer injusto", fundamentos: "Critérios claros • Plano de Desenvolvimento (PDI)", exemplo: "“Você é valioso para o time, mas para essa vaga precisamos da habilidade X. Vamos montar um plano para você chegar lá?”" },
+    { title: "Postura Inadequada ou desrespeitosa", objective: "Corrigir atitudes preservando a dignidade da pessoa", riscos: "Confronto direto, tom punitivo, falta de escuta", fundamentos: "Liderança servidora e empática • Foco em valores e comportamento observável", exemplo: "“Percebi comentários que geraram desconforto na equipe. Podemos conversar sobre como isso foi percebido e o que podemos fazer diferente?”" },
+    { title: "Falta de colaboração entre setores", objective: "Restabelecer diálogo e confiança mútua", riscos: "Defender “o lado” da própria área, reforçar divisões", fundamentos: "Temos visões diferentes, mas o mesmo objetivo: operar com segurança e eficiência.", exemplo: "“Como podemos alinhar nossos processos para garantir segurança e eficiência para todos?”" },
+    { title: "Falta de motivação ou sinais de esgotamento", objective: "Compreender causas e oferecer apoio", riscos: "Ignorar o emocional, reduzir tudo a metas", fundamentos: "Inteligência emocional • escuta genuína • acolhimento", exemplo: "“Tenho percebido que você está mais quieto. Está tudo bem? Algo está te sobrecarregando? Posso ajudar de alguma forma?”" },
+    { title: "Erros recorrentes / falhas operacionais", objective: "Acolher e reintegrar o colaborador de forma respeitosa", riscos: "Pressionar por resultados imediatos, ignorar limitações", fundamentos: "Cultura justa • Foco em lições aprendidas", exemplo: "“O que podemos aprender com esse evento para evitar repetições? Há algo no processo que possamos melhorar?”" },
+    { title: "Retorno de afastamento", objective: "Corrigir com foco no aprendizado e prevenção", riscos: "Buscar culpados, gerar medo ou vergonha", fundamentos: "Liderança empática • Cuidado humano", exemplo: "“Seja bem-vindo de volta! Como está se sentindo? Vamos alinhar juntos o ritmo do retorno para garantir seu bem-estar e desempenho.”" },
+    { title: "Desenvolvimento e mentoria", objective: "Ampliar potencial e autoconhecimento", riscos: "Focar apenas em falhas; não definir metas", fundamentos: "Comunicação empática • Foco na dignidade e no aprendizado", exemplo: "“Você tem evoluído bem. Vamos definir juntos os próximos passos para continuar crescendo?”" }
+  ];
+
+  function renderConversations() {
+    const container = document.getElementById('conversations-container');
+    container.innerHTML = conversationsData.map((item, i) => `
+      <button class="accordion" aria-expanded="false" aria-controls="panel-${i}" id="accordion-${i}">
+        ${i+1}. ${item.title}
+      </button>
+      <div class="panel" id="panel-${i}" role="region" aria-labelledby="accordion-${i}">
+        <h4>🎯 Objetivo:</h4> <p>${item.objective}</p>
+        <h4>⚠️ Riscos:</h4> <p>${item.riscos}</p>
+        <h4>📚 Fundamentos:</h4> <p>${item.fundamentos}</p>
+        <div class="example-speech">${item.exemplo}</div>
+      </div>
+    `).join('');
+
+    const acc = container.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function () {
+        const panel = this.nextElementSibling;
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.classList.toggle("active-acc");
+        this.setAttribute('aria-expanded', String(!expanded));
+        panel.style.display = expanded ? "none" : "block";
+      });
+    }
+  }
+
+  // ========= EISENHOWER LOGIC =========
+  let eisTasks = [];
+
+  function switchEisTab(evt, tab) {
+    document.querySelectorAll('.eis-tab').forEach(t => t.classList.remove('active'));
+    if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
+    
+    if (tab === 'matrix') {
+      document.getElementById('eis-tab-matrix').style.display = 'block';
+      document.getElementById('eis-tab-report').style.display = 'none';
+    } else {
+      document.getElementById('eis-tab-matrix').style.display = 'none';
+      document.getElementById('eis-tab-report').style.display = 'block';
+      generateEisDiagnosis();
+    }
+  }
+
+  function loadEisTasks() {
+    const stored = localStorage.getItem('linceEisTasks');
+    if (stored) {
+      eisTasks = JSON.parse(stored);
+      renderEisMatrix();
+    }
+  }
+
+  function saveEisTasks() {
+    localStorage.setItem('linceEisTasks', JSON.stringify(eisTasks));
+    renderEisMatrix();
+  }
+
+  function addEisTask() {
+    const name = document.getElementById('eisTaskName').value.trim();
+    const imp = document.getElementById('eisImportance').value;
+    const urg = document.getElementById('eisUrgency').value;
+    
+    if (!name) return alert('Digite o nome da tarefa.');
+
+    eisTasks.push({ id: Date.now(), name, imp, urg });
+    document.getElementById('eisTaskName').value = '';
+    saveEisTasks();
+  }
+
+  function deleteEisTask(id) {
+    eisTasks = eisTasks.filter(t => t.id !== id);
+    saveEisTasks();
+  }
+
+  function clearEisMatrix() {
+    if (confirm('Tem certeza que deseja limpar todas as tarefas?')) {
+      eisTasks = [];
+      saveEisTasks();
+    }
+  }
+
+  function renderEisMatrix() {
+    ['q1', 'q2', 'q3', 'q4'].forEach(q => {
+      document.getElementById(`list-${q}`).innerHTML = '';
+      document.getElementById(`count-${q}`).textContent = '0';
+    });
+
+    const counts = { q1: 0, q2: 0, q3: 0, q4: 0 };
+
+    eisTasks.forEach(task => {
+      let qId = '';
+      if (task.imp === 'high' && task.urg === 'high') qId = 'q1';
+      else if (task.imp === 'high' && task.urg === 'low') qId = 'q2';
+      else if (task.imp === 'low' && task.urg === 'high') qId = 'q3';
+      else qId = 'q4';
+
+      counts[qId]++;
+      
+      const li = document.createElement('li');
+      li.className = 'eis-task';
+
+      const span = document.createElement('span');
+      span.textContent = task.name;
+
+      const btn = document.createElement('button');
+      btn.title = 'Excluir tarefa';
+      btn.textContent = '❌';
+      btn.addEventListener('click', () => deleteEisTask(task.id));
+
+      li.appendChild(span);
+      li.appendChild(btn);
+      document.getElementById(`list-${qId}`).appendChild(li);
+    });
+
+    for (const [key, val] of Object.entries(counts)) {
+      document.getElementById(`count-${key}`).textContent = val;
+    }
+  }
+
+  function generateEisDiagnosis() {
+    const total = eisTasks.length;
+    if (total === 0) {
+      document.getElementById('eis-diagnosis-content').innerHTML = '<p>Nenhuma tarefa registrada para análise.</p>';
+      document.getElementById('eis-summary-text').innerHTML = '';
+      return;
+    }
+
+    const q1 = eisTasks.filter(t => t.imp === 'high' && t.urg === 'high').length;
+    const q2 = eisTasks.filter(t => t.imp === 'high' && t.urg === 'low').length;
+    const q3 = eisTasks.filter(t => t.imp === 'low' && t.urg === 'high').length;
+    const q4 = eisTasks.filter(t => t.imp === 'low' && t.urg === 'low').length;
+
+    let html = '';
+
+    if ((q1 + q3) > (total * 0.6)) {
+      html += `<div class="diag-alert">⚠️ ALERTA: Modo Bombeiro</div><p>Mais de 60% do seu tempo está em urgências. Risco de burnout alto. Tente planejar mais (Q2) ou delegar (Q3).</p>`;
+    }
+    if (q2 < (total * 0.2)) {
+      html += `<div class="diag-alert">⚠️ ALERTA: Pouco Planejamento</div><p>Menos de 20% em tarefas importantes não urgentes. Invista mais tempo aqui para evitar crises futuras.</p>`;
+    } else {
+      html += `<div class="diag-ok">✅ Planejamento Saudável</div><p>Você está dedicando tempo para prevenir problemas.</p>`;
+    }
+    if (q4 > (total * 0.15)) {
+      html += `<div class="diag-alert">⚠️ CUIDADO: Distrações</div><p>Muitas tarefas triviais. Elimine o que não agrega valor.</p>`;
+    }
+
+    document.getElementById('eis-diagnosis-content').innerHTML = html;
+
+    let summary = '<ul style="text-align: left;">';
+    eisTasks.forEach(t => {
+      let cat = '';
+      if (t.imp === 'high' && t.urg === 'high') cat = '[Q1] Crise';
+      else if (t.imp === 'high' && t.urg === 'low') cat = '[Q2] Estratégia';
+      else if (t.imp === 'low' && t.urg === 'high') cat = '[Q3] Interrupção';
+      else cat = '[Q4] Distração';
+      summary += `<li><b>${cat}:</b> ${t.name}</li>`;
+    });
+    summary += '</ul>';
+    document.getElementById('eis-summary-text').innerHTML = summary;
+  }
+
+  function exportEisReport() {
+    window.print();
+  }
+
+  // ========= PLANO (AUTO-SAVE) =========
+  let autoSaveTimeout;
+  let lembretes = [];
+
+  function autoSavePlano() {
+    clearTimeout(autoSaveTimeout);
+    autoSaveTimeout = setTimeout(() => {
+      const temas = [];
+      document.querySelectorAll('#mod-plano .tema').forEach(tema => {
+        temas.push({
+          area: tema.querySelector(`[id^=area-]`).value,
+          status: tema.querySelector(`[id^=status-]`).value,
+          prioridade: tema.querySelector(`[id^=prioridade-]`).value,
+          prazo: tema.querySelector(`[id^=prazo-]`).value,
+          comoEstou: tema.querySelector(`[id^=comoEstou-]`).value,
+          comoDevoSer: tema.querySelector(`[id^=comoDevoSer-]`).value,
+          esforco: tema.querySelector(`[id^=esforco-]`).value,
+          responsavel: tema.querySelector(`[id^=responsavel-]`).value,
+          acompanhamento: tema.querySelector(`[id^=acompanhamento-]`).value
+        });
+      });
+      const userNome = document.getElementById('planoUserName').value;
+      const userEmail = document.getElementById('planoUserEmail').value;
+      localStorage.setItem('planoAcao', JSON.stringify({temas, lembretes, userNome, userEmail}));
+      atualizarBadgePlano();
+      atualizarDashboard();
+    }, 600);
+  }
+
+  function criarTemaHTML(index) {
+    return `
+    <div class="tema" id="tema-${index}">
+      <label>Oportunidade de Melhoria *</label>
+      <input type="text" id="area-${index}" oninput="autoSavePlano()" required>
+      <label>Situação atual? *</label>
+      <textarea id="comoEstou-${index}" oninput="autoSavePlano()" required></textarea>
+      <label>Como quero estar? *</label>
+      <textarea id="comoDevoSer-${index}" oninput="autoSavePlano()" required></textarea>
+      <label>Esforço/Compromisso *</label>
+      <textarea id="esforco-${index}" oninput="autoSavePlano()" required></textarea>
+      <label>Prazo *</label>
+      <input type="date" id="prazo-${index}" oninput="autoSavePlano()" required>
+      <label>Prioridade *</label>
+      <select id="prioridade-${index}" onchange="autoSavePlano()" required>
+        <option value="">Selecione</option><option value="Alta">Alta</option><option value="Média">Média</option><option value="Baixa">Baixa</option>
+      </select>
+      <label>Status *</label>
+      <select id="status-${index}" onchange="autoSavePlano()" required>
+        <option value="">Selecione</option><option value="Em andamento">Em andamento</option><option value="Concluído">Concluído</option><option value="Pendente">Pendente</option>
+      </select>
+      <label>Responsável *</label>
+      <input type="text" id="responsavel-${index}" oninput="autoSavePlano()" required>
+      <label>Acompanhamento *</label>
+      <select id="acompanhamento-${index}" onchange="autoSavePlano()" required>
+        <option value="">Selecione</option><option value="Semanal">Semanal</option><option value="Quinzenal">Quinzenal</option><option value="Mensal">Mensal</option>
+      </select>
+      <div class="tema-actions"><button type="button" class="btn btn-remove" onclick="removerTema(${index})">Remover</button></div>
+    </div>`;
+  }
+
+  let temaCount = 0;
+  function adicionarTema() {
+    temaCount++;
+    document.getElementById('temasContainer').insertAdjacentHTML('beforeend', criarTemaHTML(temaCount));
+    autoSavePlano();
+  }
+  function removerTema(index) {
+    const el = document.getElementById(`tema-${index}`);
+    if (el) el.remove();
+    autoSavePlano();
+    filtrarTemas();
+  }
+
+  function atualizarDashboard() {
+    const canvas = document.getElementById('chartPlano');
+    if (!canvas) return;
+    const temas = JSON.parse(localStorage.getItem('planoAcao'))?.temas || [];
+    const stats = { "Em andamento": 0, "Concluído": 0, "Pendente": 0 };
+    temas.forEach(t => { if (stats[t.status] !== undefined) stats[t.status]++; });
+
+    if (window.planoChart) window.planoChart.destroy();
+    if (typeof Chart === 'undefined') return; 
+
+    const ctx = canvas.getContext('2d');
+    window.planoChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: Object.keys(stats),
+        datasets: [{ data: Object.values(stats), backgroundColor: ['#e67e22','#27ae60','#d9534f'] }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            labels: { color: getComputedStyle(document.body).getPropertyValue('--text-color').trim() || '#333' }
+          }
+        }
+      }
+    });
+  }
+
+  function atualizarBadgePlano() {
+    const saved = JSON.parse(localStorage.getItem('planoAcao')) || { temas: [] };
+    const total = saved.temas.length;
+    const concluidos = saved.temas.filter(t => t.status === 'Concluído').length;
+    const badge = document.getElementById('badge-plano');
+    badge.style.display = total > 0 ? 'inline-block' : 'none';
+    document.getElementById('dashboard-info').innerText =
+      total > 0 ? `Temas: ${total} • Concluídos: ${concluidos}` : '';
+  }
+
+  function filtrarTemas() {
+    const termo = (document.getElementById('searchTema').value || '').toLowerCase();
+    const status = document.getElementById('filterStatus').value;
+    const prioridade = document.getElementById('filterPrioridade').value;
+
+    document.querySelectorAll('#temasContainer .tema').forEach(tema => {
+      const area = tema.querySelector(`[id^=area-]`)?.value.toLowerCase() || '';
+      const st = tema.querySelector(`[id^=status-]`)?.value || '';
+      const pr = tema.querySelector(`[id^=prioridade-]`)?.value || '';
+
+      let show = true;
+      if (termo && !area.includes(termo)) show = false;
+      if (status && st !== status) show = false;
+      if (prioridade && pr !== prioridade) show = false;
+
+      tema.style.display = show ? '' : 'none';
+    });
+  }
+
+  // ========= CITAÇÕES / INIT =========
+  const quotes = [
+    "Resolver conflitos não é vencer uma discussão, mas construir juntos um caminho melhor.",
+    "A comunicação eficaz do líder não é a que fala mais, mas a que escuta melhor, traduz propósito em clareza e gera confiança para a ação.",
+    "A liderança verdadeiramente eficaz começa quando o líder enxerga pessoas não como recursos, mas como sujeitos com história, valores e capacidade de evoluir.",
+    "Faça o teu melhor, nas condições que você tem, enquanto não tem condições melhores para fazer melhor ainda, Cortella."
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderConversations();
+    loadEisTasks(); // Init Eisenhower
+    document.getElementById('daily-quote').innerText = `"${quotes[Math.floor(Math.random()*quotes.length)]}"`;
+
+    const saved = JSON.parse(localStorage.getItem('planoAcao'));
+    if (saved) {
+      document.getElementById('planoUserName').value = saved.userNome || "";
+      document.getElementById('planoUserEmail').value = saved.userEmail || "";
+      lembretes = Array.isArray(saved.lembretes) ? saved.lembretes : [];
+      renderLembretes();
+
+      (saved.temas || []).forEach((t, i) => {
+        adicionarTema();
+        const el = (id) => document.getElementById(`${id}-${i+1}`);
+        if (el('area')) {
+          el('area').value = t.area; el('status').value = t.status; el('prioridade').value = t.prioridade;
+          el('prazo').value = t.prazo; el('comoEstou').value = t.comoEstou; el('comoDevoSer').value = t.comoDevoSer;
+          el('esforco').value = t.esforco; el('responsavel').value = t.responsavel; el('acompanhamento').value = t.acompanhamento;
+        }
+      });
+    } else { adicionarTema(); }
+
+    atualizarBadgePlano();
+
+    // Clique fora do tour fecha modal
+    document.getElementById('tour-modal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'tour-modal') closeTour();
+    });
+
+    // Inicializa o gate de identificação do Goleman
+    initializeGolemanUserGate();
+  });
+
+  function showTour() { document.getElementById('tour-modal').style.display = 'block'; }
+  function closeTour() { document.getElementById('tour-modal').style.display = 'none'; }
+
+  function renderLembretes() {
+    const list = document.getElementById('lembreteList');
+    list.innerHTML = '';
+    lembretes.forEach((l, i) => {
+      const item = document.createElement('div');
+      item.textContent = `• ${new Date(l).toLocaleString()}`;
+      const btn = document.createElement('button');
+      btn.textContent = 'Remover';
+      btn.className = 'btn btn-remove';
+      btn.style.marginLeft = '10px';
+      btn.onclick = () => {
+        lembretes.splice(i,1);
+        autoSavePlano();
+        renderLembretes();
+      };
+      item.appendChild(btn);
+      list.appendChild(item);
+    });
+  }
+  function adicionarLembrete() {
+    const dt = document.getElementById('lembreteData').value;
+    if (!dt) return alert('Selecione data e hora.');
+    lembretes.push(dt);
+    autoSavePlano();
+    renderLembretes();
+    document.getElementById('lembreteData').value = '';
+  }
+
+// ====== AUTOCONHECIMENTO ABAS ======
+  function showAutocTab(tab) {
+    ['temperamento', 'resumo', 'goleman'].forEach(t => {
+      const el = document.getElementById('autoc_tab_' + t);
+      if (el) el.style.display = (t === tab) ? 'block' : 'none';
+      const btn = document.getElementById('tab_' + t);
+      if (btn) {
+          if (t === tab) { btn.classList.remove('secondary-btn'); }
+          else { btn.classList.add('secondary-btn'); }
+      }
+    });
+  }
+  window.showAutocTab = showAutocTab;
+  document.addEventListener('DOMContentLoaded',()=>{ showAutocTab('temperamento'); });
+
+  // ====== GOLEMAN TESTE ======
+  function calculateGoleman() {
+    const form = document.getElementById('golemanForm');
+    const data = new FormData(form);
+    const estilos = ['coercitivo','visionario','afiliativo','democratico','marcapasso','coaching'];
+    let cont = {coercitivo:0, visionario:0, afiliativo:0, democratico:0, marcapasso:0, coaching:0};
+    for (let i=1; i<=6; i++) {
+      const val = data.get('g'+i);
+      if (!val) { alert('Responda todas as perguntas.'); return; }
+      cont[val]++;
+    }
+    let max = Math.max(...Object.values(cont));
+    let dominantes = estilos.filter(e=>cont[e]===max);
+    let nomes = {
+      coercitivo:'Coercitivo',
+      visionario:'Visionário',
+      afiliativo:'Afiliativo',
+      democratico:'Democrático',
+      marcapasso:'Marca-passo',
+      coaching:'Coaching'
+    };
+    let descricoes = {
+      coercitivo:'Exige conformidade imediata ("Faça o que eu digo"). Útil em crises, mas pode gerar resistência se usado em excesso.',
+      visionario:'Mobiliza pessoas para uma visão ("Venham comigo"). Inspira e engaja, geralmente o mais eficaz.',
+      afiliativo:'Cria harmonia e laços emocionais ("Pessoas vêm primeiro"). Fortalece o clima, mas pode evitar conflitos necessários.',
+      democratico:'Constrói consenso através da participação ("O que vocês acham?"). Gera engajamento, mas pode ser lento.',
+      marcapasso:'Define padrões elevados de desempenho ("Faça como eu, agora"). Bom para equipes maduras, mas pode gerar ansiedade.',
+      coaching:'Desenvolve pessoas para o futuro ("Tente isto"). Foca no crescimento individual, exige tempo e dedicação.'
+    };
+    document.getElementById('golemanForm').style.display = 'none';
+    document.getElementById('goleman-result').style.display = 'block';
+    document.getElementById('goleman-style').innerText = dominantes.map(e=>nomes[e]).join(', ');
+    document.getElementById('goleman-desc').innerText = dominantes.map(e=>descricoes[e]).join('\n\n');
+    sessionStorage.setItem('golemanDominante', dominantes.map(e=>nomes[e]).join(', '));
+    sessionStorage.setItem('golemanDescricao', dominantes.map(e=>descricoes[e]).join('\n\n'));
+  }
+  function resetGoleman() {
+    document.getElementById('golemanForm').reset();
+    document.getElementById('golemanForm').style.display = 'block';
+    document.getElementById('goleman-result').style.display = 'none';
+  }
+
+  // ====== RELATÓRIO INTEGRADO ======
+  function renderRelatorioIntegrado() {
+    let temp = document.getElementById('final-temperament')?.innerText || sessionStorage.getItem('temperamentoDominante') || '';
+    let tempDesc = document.getElementById('final-desc')?.innerText || sessionStorage.getItem('temperamentoDescricao') || '';
+    if (!temp) temp = 'Não realizado';
+    if (!tempDesc) tempDesc = '';
+    document.getElementById('relatorio-temperamento').innerText = temp;
+    document.getElementById('relatorio-temperamento-desc').innerText = tempDesc;
+    let gol = sessionStorage.getItem('golemanDominante') || '';
+    let golDesc = sessionStorage.getItem('golemanDescricao') || '';
+    if (!gol) gol = 'Não realizado';
+    document.getElementById('relatorio-goleman').innerText = gol;
+    document.getElementById('relatorio-goleman-desc').innerText = golDesc;
+    let dicas = '';
+    if (temp && gol && temp!=='Não realizado' && gol!=='Não realizado') {
+      dicas = 'Líderes eficazes alternam estilos conforme a situação. Se seu temperamento é '+temp+', busque flexibilidade para usar estilos de liderança diferentes. Seu estilo '+gol+' pode ser alavancado junto a Visionário, Democrático, Afiliativo e Coaching para ampliar o impacto.';
+    } else {
+      dicas = 'Realize ambos os testes para receber dicas personalizadas.';
+    }
+    document.getElementById('relatorio-dicas').innerText = dicas;
+  }
+
+  // ====== [NOVO] Cálculo do Teste 4 Temperamentos (16x4) ======
+  function calculateResult() {
+    const form = document.getElementById('temperamentForm');
+    const data = new FormData(form);
+
+    // Validação: todas as 16 respondidas
+    for (let i=1; i<=16; i++) {
+      if (!data.get('q'+i)) { alert("⚠️ Responda todas as perguntas."); return; }
+    }
+
+    // Soma por temperamento
+    const scores = { SANG:0, COL:0, MEL:0, FLE:0 };
+    for (let i=1; i<=16; i++) {
+      const v = data.get('q'+i);
+      if (scores[v] !== undefined) scores[v] += 1;
+    }
+
+    // Percentuais
+    const total = 16;
+    const perc = Object.fromEntries(Object.entries(scores).map(([k,v]) => [k, Math.round((v/total)*100)]));
+
+    // Ranking e predominantes (empate suportado)
+    const ranking = Object.entries(scores).sort((a,b)=> b[1]-a[1]);
+    const topScore = ranking[0][1];
+    const topTemps = ranking.filter(([_,v]) => v === topScore).map(([k])=>k);
+
+    // Metadados descritivos
+    const META = {
+      SANG: {
+        nome: "Sanguíneo",
+        resumo: "Comunicativo, inspirador e agregador; promove vínculos e clima positivo.",
+        forcas: [
+          "Cria conexão e engaja rapidamente áreas e pessoas",
+          "Comunicação clara e motivadora",
+          "Facilita alinhamentos e reduz tensão"
+        ],
+        atencao: [
+          "Evitar superficialidade e dispersão",
+          "Cuidar de foco e disciplina de execução"
+        ],
+        dicas: [
+          "Converta energia em entregas: defina checklists e donos de ação",
+          "Antes de fechar acordos, valide riscos e premissas críticas"
+        ],
+        color: "#1aa3c8"
+      },
+      COL: {
+        nome: "Colérico",
+        resumo: "Determinado, direto e orientado a resultados; decide e destrava.",
+        forcas: [
+          "Tomada de decisão sob pressão",
+          "Coragem para enfrentar conflitos",
+          "Define prioridades e acelera execução"
+        ],
+        atencao: [
+          "Evitar dureza excessiva que afete segurança psicológica",
+          "Escutar sinais fracos e perspectivas divergentes"
+        ],
+        dicas: [
+          "Use perguntas antes de decidir (o quê/por quê/risco/impacto)",
+          "Combine cobrança com suporte e reconhecimento"
+        ],
+        color: "#0f7a5f"
+      },
+      MEL: {
+        nome: "Melancólico",
+        resumo: "Analítico, profundo e orientado à qualidade e segurança.",
+        forcas: [
+          "Raciocínio analítico e foco em padrões",
+          "Prevenção de erros e retrabalho",
+          "Senso de justiça e coerência"
+        ],
+        atencao: [
+          "Evitar paralisia por análise",
+          "Moderar críticas para não minar engajamento"
+        ],
+        dicas: [
+          "Defina critérios mínimos viáveis (MVP) e itere",
+          "Socialize análises em linguagem simples e visual"
+        ],
+        color: "#3b5b8a"
+      },
+      FLE: {
+        nome: "Fleumático",
+        resumo: "Estável, paciente e conciliador; constrói consensos duráveis.",
+        forcas: [
+          "Estabilidade emocional mesmo sob pressão",
+          "Escuta ativa e ambiente seguro para colaborar",
+          "Excelência em rotinas e cadência operacional"
+        ],
+        atencao: [
+          "Evitar adiar decisões difíceis",
+          "Não sacrificar verdade por harmonia"
+        ],
+        dicas: [
+          "Defina prazos de decisão e critérios de escalonamento",
+          "Pratique confrontos respeitosos com fatos e pedidos claros"
+        ],
+        color: "#7a6a2a"
+      }
+    };
+
+    // Título
+    const titulo = topTemps.map(t=>META[t].nome).join(" + ");
+    document.getElementById('final-temperament').innerText = titulo;
+
+    // Descrição inspiradora
+    let desc;
+    if (topTemps.length === 1) {
+      const t = META[topTemps[0]];
+      desc = `${t.resumo} Foque em potencializar suas forças, enquanto cuida dos pontos de atenção para liderar de forma colaborativa.`;
+    } else {
+      const nomes = topTemps.map(t=>META[t].nome).join(" + ");
+      desc = `Combinação ${nomes}. Você integra características complementares. Use-as de forma situacional e colabore ativamente para equilibrar ritmo, pessoas e qualidade.`;
+    }
+    document.getElementById('final-desc').innerText = desc;
+
+    // Breakdown (barras)
+    const bd = document.getElementById('final-breakdown');
+    bd.innerHTML = `
+      <div class="temp-scorebar"><div>Sanguíneo</div><div class="temp-bar"><i style="width:${perc.SANG}%; background:${META.SANG.color}"></i></div><div>${perc.SANG}%</div></div>
+      <div class="temp-scorebar"><div>Colérico</div><div class="temp-bar"><i style="width:${perc.COL}%; background:${META.COL.color}"></i></div><div>${perc.COL}%</div></div>
+      <div class="temp-scorebar"><div>Melancólico</div><div class="temp-bar"><i style="width:${perc.MEL}%; background:${META.MEL.color}"></i></div><div>${perc.MEL}%</div></div>
+      <div class="temp-scorebar"><div>Fleumático</div><div class="temp-bar"><i style="width:${perc.FLE}%; background:${META.FLE.color}"></i></div><div>${perc.FLE}%</div></div>
+      <div class="temp-mini">Total de respostas: ${total}</div>
+    `;
+
+    // Blocos de orientação para os predominantes
+    const blocks = document.getElementById('final-blocks');
+    blocks.innerHTML = topTemps.map(code=>{
+      const t = META[code];
+      return `
+        <div class="temp-block">
+          <h4 style="margin:6px 0 6px;color:${t.color}">${t.nome}</h4>
+          <p><strong>Forças:</strong></p>
+          <ul>${t.forcas.map(f=>`<li>${f}</li>`).join('')}</ul>
+          <p><strong>Pontos de atenção:</strong></p>
+          <ul>${t.atencao.map(a=>`<li>${a}</li>`).join('')}</ul>
+          <p><strong>Dicas de colaboração:</strong></p>
+          <ul>${t.dicas.map(d=>`<li>${d}</li>`).join('')}</ul>
+        </div>
+      `;
+    }).join('');
+
+    // Exibe resultados
+    document.getElementById('quiz-form').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+    document.getElementById('badge-teste').style.display = 'inline-block';
+
+    // Persistência para relatório integrado
+    sessionStorage.setItem('temperamentoDominante', titulo);
+    sessionStorage.setItem('temperamentoDescricao', desc);
+  }
+
+  // ========= NOVO: Identificação na aba Goleman + Botões do Relatório =========
+  function validateGolemanUserInfo() {
+    const name = (document.getElementById('golemanUserName')?.value || '').trim();
+    const email = (document.getElementById('golemanUserEmail')?.value || '').trim();
+    const errorMsg = document.getElementById('goleman-form-error');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (name.length < 3 || !emailRegex.test(email)) {
+      if (errorMsg) errorMsg.style.display = 'block';
+      return;
+    }
+    if (errorMsg) errorMsg.style.display = 'none';
+
+    sessionStorage.setItem('linceUserName', name);
+    sessionStorage.setItem('linceUserEmail', email);
+
+    const gate = document.getElementById('goleman-user-info');
+    const form = document.getElementById('golemanForm');
+    if (gate) gate.style.display = 'none';
+    if (form) form.style.display = 'block';
+  }
+
+  function initializeGolemanUserGate() {
+    const hasName = !!(sessionStorage.getItem('linceUserName') || '').trim();
+    const hasEmail = !!(sessionStorage.getItem('linceUserEmail') || '').trim();
+    const gate = document.getElementById('goleman-user-info');
+    const form = document.getElementById('golemanForm');
+
+    if (!gate || !form) return;
+
+    if (hasName && hasEmail) {
+      gate.style.display = 'none';
+      form.style.display = 'block';
+    } else {
+      const n = sessionStorage.getItem('linceUserName') || '';
+      const e = sessionStorage.getItem('linceUserEmail') || '';
+      const nEl = document.getElementById('golemanUserName');
+      const eEl = document.getElementById('golemanUserEmail');
+      if (nEl) nEl.value = n;
+      if (eEl) eEl.value = e;
+      gate.style.display = 'block';
+      form.style.display = 'none';
+    }
+  }
+
+  function printRelatorio() { window.print(); }
+  function sendRelatorioEmail() {
+    const name = sessionStorage.getItem('linceUserName') || '';
+    const to = sessionStorage.getItem('linceUserEmail') || '';
+
+    const temp = sessionStorage.getItem('temperamentoDominante') ||
+                 (document.getElementById('relatorio-temperamento')?.innerText || 'Não realizado');
+    const tempDesc = sessionStorage.getItem('temperamentoDescricao') ||
+                     (document.getElementById('relatorio-temperamento-desc')?.innerText || '');
+
+    const gol = sessionStorage.getItem('golemanDominante') ||
+                (document.getElementById('relatorio-goleman')?.innerText || 'Não realizado');
+    const golDesc = sessionStorage.getItem('golemanDescricao') ||
+                    (document.getElementById('relatorio-goleman-desc')?.innerText || '');
+
+    const linhas = [];
+    linhas.push(`Relatório LINCE – Autoconhecimento`);
+    if (name) linhas.push(`Nome: ${name}`);
+    linhas.push('');
+    linhas.push(`Temperamento: ${temp}`);
+    if (tempDesc) linhas.push(tempDesc);
+    linhas.push('');
+    linhas.push(`Estilo de Liderança (Daniel Goleman): ${gol}`);
+    if (golDesc) linhas.push(golDesc);
+    linhas.push('');
+    linhas.push(`Dicas de Desenvolvimento:`);
+    const dicas = document.getElementById('relatorio-dicas')?.innerText || '';
+    if (dicas) linhas.push(dicas);
+
+    const subject = `Relatório LINCE – Autoconhecimento`;
+    const body = linhas.join('\n');
+
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  }
+
+  // ========= EXPOSIÇÃO DE FUNÇÕES =========
+  window.toggleTheme = toggleTheme;
+  window.changeTab = changeTab;
+  window.goHome = goHome;
+  window.validateUserInfo = validateUserInfo;
+  window.calculateResult = calculateResult;
+  window.resetTest = resetTest;
+  window.sendEmailResult = sendEmailResult;
+  window.checkChecklistBadge = checkChecklistBadge;
+  window.adicionarTema = adicionarTema;
+  window.removerTema = removerTema;
+  window.filtrarTemas = filtrarTemas;
+  window.autoSavePlano = autoSavePlano;
+  window.adicionarLembrete = adicionarLembrete;
+  window.showTour = showTour;
+  window.closeTour = closeTour;
+
+  // Simulador
+  window.selecionarCenario = selecionarCenario;
+  window.iniciarSimulacao = iniciarSimulacao;
+  window.reiniciarSimulacao = reiniciarSimulacao;
+  window.proximaPergunta = proximaPergunta;
+  window.responder = responder;
+
+  // Eisenhower
+  window.switchEisTab = switchEisTab;
+  window.addEisTask = addEisTask;
+  window.deleteEisTask = deleteEisTask;
+  window.clearEisMatrix = clearEisMatrix;
+  window.exportEisReport = exportEisReport;
+
+  // Novas funções expostas
+  window.validateGolemanUserInfo = validateGolemanUserInfo;
+  window.printRelatorio = printRelatorio;
+  window.sendRelatorioEmail = sendRelatorioEmail;
+
+  // Registro do Service Worker para PWA
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('LINCE PWA: Ativo!'))
+        .catch(err => console.log('Erro no registro do PWA:', err));
+    });
+  }
+
+  // ========= SIMULADOR =========
+  let cenarioSelecionado = null;
+  let etapaAtual = 0;
+  let pontuacao = 0;
+
+  const cenarios = {
+    "Caio": {
+        titulo: "O Veterano Desmotivado",
+        descricao: `
+            <strong>Situação:</strong> Caio é um bombeiro experiente, respeitado, mas tem chegado atrasado, criticando novatos e ignorando protocolos.<br><br>
+            <strong>Seu objetivo:</strong> Corrigir o comportamento sem destruir a relação.
+        `,
+        perguntas: [
+            {
+                texto: "Caio chega novamente atrasado. Como você inicia a conversa?",
+                opcoes: [
+                    {texto: "Chama atenção diretamente e diz que isso é inaceitável.", tipo: "ruim"},
+                    {texto: "Pergunta se está tudo bem e se algo o tem afetado.", tipo: "bom"}
+                ]
+            },
+            {
+                texto: "Ele diz que está cansado das mudanças de protocolo. O que você faz?",
+                opcoes: [
+                    {texto: "Lembra que seguir regras é obrigatório.", tipo: "ruim"},
+                    {texto: "Reconhece o incômodo e explica o propósito das mudanças.", tipo: "bom"}
+                ]
+            },
+            {
+                texto: "Durante a conversa, ele critica os novatos. Você:",
+                opcoes: [
+                    {texto: "Diz para ele parar imediatamente e que isso prejudica a equipe.", tipo: "ruim"},
+                    {texto: "Convida ele a ajudar os novatos com sua experiência.", tipo: "bom"}
+                ]
+            }
+        ]
+    },
+  "Ana": {
+        titulo: "A Analista Sobrecarregada",
+        descricao: `
+            <strong>Situação:</strong> Ana é dedicada, mas tem acumulado erros, perdido prazos e ficado visivelmente abalada.<br><br>
+            <strong>Seu objetivo:</strong> Apoiar sem pressionar, recuperar estabilidade e desempenho.
+        `,
+        perguntas: [
+            {
+                texto: "Você percebe que Ana está mais quieta e distante. O que faz primeiro?",
+                opcoes: [
+                    {texto: "Cobra mais atenção e foco imediatamente.", tipo: "ruim"},
+                    {texto: "Pergunta se está tudo bem e se algo tem preocupado ela.", tipo: "bom"}
+                ]
+            },
+            {
+                texto: "Ela revela que está sobrecarregada. Você:",
+                opcoes: [
+                    {texto: "Diz que todos estão sobrecarregados, que ela precisa se adaptar.", tipo: "ruim"},
+                    {texto: "Valida o sentimento e pede para ela descrever o ponto mais crítico.", tipo: "bom"}
+                ]
+            },
+            {
+                texto: "Ela admite medo de ser vista como fraca. Qual sua resposta?",
+                opcoes: [
+                    {texto: "Explica que desempenho é o que importa e sentimentos não cabem no trabalho.", tipo: "ruim"},
+                    {texto: "Reforça que pedir apoio é maturidade e que você está ali para ajudar.", tipo: "bom"}
+                ]
+            }
+        ]
+    },
+  "pedro": {
+                titulo: "O Veterano Imprudente",
+                descricao: `
+                    <strong>Situação:</strong> Pedro, operador com 20 anos de casa, foi visto realizando uma intervenção rápida em um equipamento <u>sem realizar o bloqueio de energia</u> (LIBRA). Ele alega que conhece a máquina como ninguém e que o bloqueio demoraria mais que o conserto.<br><br>
+                    <strong>Seu objetivo:</strong> Corrigir o comportamento inseguro imediatamente e reforçar a cultura de segurança sem gerar revolta.
+                `,
+                perguntas: [
+                    {
+                        texto: "Você flagra Pedro com a mão na máquina sem o bloqueio. Qual sua ação imediata?",
+                        opcoes: [
+                            {texto: "Espera ele terminar (já que falta pouco) e depois chama ele num canto para dar um toque.", tipo: "ruim"},
+                            {texto: "Interrompe a atividade imediatamente e solicita que ele se afaste do equipamento para conversarem.", tipo: "bom"}
+                        ]
+                    },
+                    {
+                        texto: "Pedro retruca: 'Chefe, é só um ajuste de 1 minuto. Faço isso há 20 anos e nunca me arranhei. O bloqueio leva 15 minutos!'. O que você responde?",
+                        opcoes: [
+                            {texto: "Explica que a experiência não blinda contra acidentes e que, como líder técnico, ele está ensinando os mais novos a se arriscarem.", tipo: "bom"},
+                            {texto: "Diz que regra é regra e que se ele fizer de novo levará uma advertência formal por escrito.", tipo: "ruim"}
+                        ]
+                    },
+                    {
+                        texto: "Ele concorda, mas resmunga que o procedimento é burocrático demais. Como transformar isso em algo positivo?",
+                        opcoes: [
+                            {texto: "Diz: 'Se o procedimento é lento, vamos revisar o processo juntos para otimizar, mas nunca pulá-lo'.", tipo: "bom"},
+                            {texto: "Diz: 'Infelizmente é o que a segurança exige, temos que aceitar e seguir'.", tipo: "ruim"}
+                        ]
+                    }
+                ]
+            },
+  "stela": {
+        titulo: "A Técnica Resistente",
+        descricao: `
+            <strong>Situação:</strong> Stela é uma técnica de operação altamente qualificada e detalhista. Com a implementação do novo sistema de registro digital, ela passou a ser irônica nas reuniões, dizendo que "no papel nunca deu erro" e influenciando os colegas a não usarem a ferramenta.<br><br>
+            <strong>Seu objetivo:</strong> Transformar a resistência de Stela em colaboração, valorizando sua senioridade sem abrir mão da modernização.
+        `,
+        perguntas: [
+            {
+                texto: "Durante a passagem de turno, Stela faz um comentário sarcástico sobre o tablet novo na frente da equipe. Como você reage?",
+                opcoes: [
+                    {texto: "Dá uma resposta firme na frente de todos para manter a autoridade.", tipo: "ruim"},
+                    {texto: "Ignora o sarcasmo no momento e a chama para uma conversa privada logo depois.", tipo: "bom"}
+                ]
+            },
+            {
+                texto: "No privado, ela diz que o sistema digital é perda de tempo e burocracia. Qual sua abordagem?",
+                opcoes: [
+                    {texto: "Explica que é uma ordem da diretoria e que todos devem cumprir.", tipo: "ruim"},
+                    {texto: "Pergunta quais dificuldades específicas ela encontrou e como a experiência dela pode ajudar a melhorar o fluxo.", tipo: "bom"}
+                ]
+            },
+            {
+                texto: "Stela admite que tem medo de cometer erros bobos no sistema e parecer 'atrapalhada'. Como você lidera?",
+                opcoes: [
+                    {texto: "Diz que é muito simples e que até uma criança aprenderia rápido.", tipo: "ruim"},
+                    {texto: "Propõe que ela seja a 'usuária-chave' para testar melhorias, oferecendo um treinamento individual sem pressão.", tipo: "bom"}
+                ]
+            }
+        ]
+    }
+};
+
+  function selecionarCenario(id) {
+    cenarioSelecionado = cenarios[id];
+    const box = document.getElementById("sim-cenario-descricao");
+    box.innerHTML = `<h3>📜 ${cenarioSelecionado.titulo}</h3><p>${cenarioSelecionado.descricao}</p>`;
+    box.style.display = "block";
+    document.getElementById("btn-iniciar").style.display = "block";
+  }
+
+  function iniciarSimulacao() {
+    etapaAtual = 0;
+    pontuacao = 0;
+
+    document.getElementById("sim-start").style.display = "none";
+    document.getElementById("sim-game").style.display = "block";
+
+    document.getElementById("sim-bar").style.width = "0%";
+    carregarPergunta();
+  }
+
+  function carregarPergunta() {
+    const p = cenarioSelecionado.perguntas[etapaAtual];
+    let html = `<div class="sim-stage"><p class="sim-text">${p.texto}</p>`;
+    p.opcoes.forEach((op, i) => {
+      html += `<button class="sim-btn-option" onclick="responder(${i})">${op.texto}</button>`;
+    });
+    html += `</div>`;
+
+    document.getElementById("sim-content").innerHTML = html;
+    const fb = document.getElementById("sim-feedback-box");
+    fb.style.display = "none";
+    fb.className = "sim-feedback";
+    fb.textContent = "";
+
+    document.getElementById("sim-bar").style.width =
+      Math.min((etapaAtual / cenarioSelecionado.perguntas.length) * 100, 100) + "%";
+  }
+
+  function responder(indice) {
+    const p = cenarioSelecionado.perguntas[etapaAtual];
+    const escolha = p.opcoes[indice];
+
+    document.querySelectorAll('#sim-content .sim-btn-option').forEach(btn => btn.disabled = true);
+
+    const box = document.getElementById("sim-feedback-box");
+    box.style.display = "block";
+
+    if (escolha.tipo === "bom") {
+      pontuacao++;
+      box.className = "sim-feedback feedback-good";
+      box.textContent = "Boa escolha! 👍";
+    } else {
+      box.className = "sim-feedback feedback-bad";
+      box.textContent = "Essa escolha pode gerar resistência. Tente outra abordagem.";
+    }
+
+    etapaAtual++;
+    const nextBtnContainer = document.getElementById("sim-next-btn-container");
+    nextBtnContainer.style.display = "block";
+    const nextBtn = document.getElementById("sim-btn-next");
+    nextBtn.onclick = null;
+    nextBtn.onclick = proximaPergunta;
+  }
+
+  function proximaPergunta() {
+    const nextBtn = document.getElementById("sim-next-btn-container");
+    nextBtn.style.display = "none";
+
+    if (etapaAtual >= cenarioSelecionado.perguntas.length) {
+      finalizarSimulacao();
+    } else {
+      carregarPergunta();
+    }
+  }
+
+  function finalizarSimulacao() {
+    document.getElementById("sim-game").style.display = "none";
+    document.getElementById("sim-result").style.display = "block";
+
+    const score = pontuacao;
+    const total = cenarioSelecionado.perguntas.length;
+
+    document.getElementById("sim-final-title").innerText = `Resultado: ${score}/${total}`;
+    document.getElementById("sim-final-desc").innerText = score > total/2
+      ? "Excelente! Sua abordagem foi colaborativa e estratégica."
+      : "Você acertou alguns pontos, mas pode melhorar sua empatia e estratégia.";
+
+    document.getElementById("sim-final-tip").innerHTML =
+      (score === total)
+      ? "💡 Dica: Continue reconhecendo sentimentos, explicando o 'porquê' e convidando para soluções conjuntas."
+      : "💡 Dica: Comece acolhendo, conecte ao propósito e convide para corresponsabilidade.";
+
+    document.getElementById("badge-sim").style.display = "inline-block";
+  }
+
+  function reiniciarSimulacao() {
+    document.getElementById("sim-result").style.display = "none";
+
+    cenarioSelecionado = null;
+    const box = document.getElementById("sim-cenario-descricao");
+    box.innerHTML = "";
+    box.style.display = "none";
+    document.getElementById("btn-iniciar").style.display = "none";
+
+    document.getElementById("sim-start").style.display = "block";
+  }
+
+  // Expor simulador
+  window.selecionarCenario = selecionarCenario;
+  window.iniciarSimulacao = iniciarSimulacao;
+  window.reiniciarSimulacao = reiniciarSimulacao;
+  window.proximaPergunta = proximaPergunta;
+  window.responder = responder;
+
+})(); // Fim da IIFE
+  </script>
+
+</body>
+</html>

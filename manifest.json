@@ -1,0 +1,21 @@
+{
+  "name": "LINCE - Guia de Liderança",
+  "short_name": "LINCE",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f6f7",
+  "theme_color": "#e67e22",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
